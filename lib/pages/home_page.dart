@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cozy_app/theme.dart';
 import 'package:cozy_app/widgets/city_card.dart';
 import 'package:cozy_app/widgets/space_card.dart';
+import 'package:cozy_app/widgets/tips_card.dart';
 import 'package:cozy_app/models/city.dart';
 import 'package:cozy_app/models/space.dart';
 
@@ -209,9 +210,15 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 16,
                   ),
-                  // ListView(
-                  //   children: [],
-                  // ),
+                  Column(
+                    children: [
+                      TipsCard(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TipsCard(),
+                    ],
+                  ),
                 ],
               ),
             )
