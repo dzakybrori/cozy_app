@@ -6,6 +6,8 @@ Color secondaryColor = Color(0XFFFF9376);
 Color greySubTextColor = Color(0XFF7A7E86);
 Color lightGreySubTextColor = Color(0XFF82868E);
 
+double paddingEdge = 24;
+
 TextStyle titleTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
   color: Colors.black,
