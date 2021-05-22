@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cozy_app/theme.dart';
+import 'package:cozy_app/widgets/city_card.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -35,6 +37,38 @@ class HomePage extends StatelessWidget {
                       style: subTitleTextStyle.copyWith(
                         fontSize: 16,
                         color: lightGreySubTextColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: paddingEdge,
+                  bottom: 30,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Popular Cities',
+                      style: regulerTextStyle,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      height: 150,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          CityCard(),
+                          CityCard(),
+                          CityCard(),
+                          CityCard(),
+                          CityCard(),
+                          CityCard(),
+                        ],
                       ),
                     ),
                   ],

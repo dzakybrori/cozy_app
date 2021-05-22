@@ -8,6 +8,12 @@ Color lightGreySubTextColor = Color(0XFF82868E);
 
 double paddingEdge = 24;
 
+TextStyle regulerTextStyle = GoogleFonts.poppins(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+  color: Colors.black,
+);
+
 TextStyle titleTextStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
   color: Colors.black,
