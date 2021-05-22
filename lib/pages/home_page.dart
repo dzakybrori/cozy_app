@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cozy_app/theme.dart';
 import 'package:cozy_app/widgets/city_card.dart';
+import 'package:cozy_app/widgets/space_card.dart';
 import 'package:cozy_app/models/city.dart';
 
 class HomePage extends StatelessWidget {
@@ -50,6 +51,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              // NOTE: ListView Popular Cities
               Container(
                 height: 150,
                 child: ListView(
@@ -123,6 +125,49 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              // NOTE: End of Popular Cities
+              // NOTE: Recommended Space Section
+              Padding(
+                padding: EdgeInsets.only(
+                  left: paddingEdge,
+                  right: paddingEdge,
+                  top: 30,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Recommended Space',
+                      style: regulerTextStyle,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      height: 200,
+                      child: ListView(
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          SpaceCard(),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Tips & Guidance',
+                      style: regulerTextStyle,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    // ListView(
+                    //   children: [],
+                    // ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

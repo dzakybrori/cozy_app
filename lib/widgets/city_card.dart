@@ -1,5 +1,5 @@
-import 'package:cozy_app/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:cozy_app/theme.dart';
 import 'package:cozy_app/models/city.dart';
 
 class CityCard extends StatelessWidget {
