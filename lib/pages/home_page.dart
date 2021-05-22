@@ -10,166 +10,167 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: paddingEdge,
-          ),
-          child: ListView(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: paddingEdge,
-                  right: paddingEdge,
-                  bottom: 16,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Explore Now',
-                      style: titleTextStyle.copyWith(
-                        fontSize: 24,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2,
-                    ),
-                    Text(
-                      'Mencari kosan yang cozy',
-                      style: subTitleTextStyle.copyWith(
-                        fontSize: 16,
-                        color: lightGreySubTextColor,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      'Popular Cities',
-                      style: regulerTextStyle,
-                    ),
-                  ],
-                ),
+        bottom: false,
+        child: ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                top: paddingEdge,
+                left: paddingEdge,
+                right: paddingEdge,
+                bottom: 16,
               ),
-              // NOTE: ListView Popular Cities
-              Container(
-                height: 150,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    SizedBox(
-                      width: 24,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Explore Now',
+                    style: titleTextStyle.copyWith(
+                      fontSize: 24,
                     ),
-                    CityCard(
-                      City(
-                        id: 1,
-                        name: 'Jakarta',
-                        imageUrl: 'assets/images/city1_jakarta.png',
-                      ),
+                  ),
+                  SizedBox(
+                    height: 2,
+                  ),
+                  Text(
+                    'Mencari kosan yang cozy',
+                    style: subTitleTextStyle.copyWith(
+                      fontSize: 16,
+                      color: lightGreySubTextColor,
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    CityCard(
-                      City(
-                        id: 2,
-                        name: 'Bandung',
-                        imageUrl: 'assets/images/city2_bandung.png',
-                        isFavorite: true,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    CityCard(
-                      City(
-                        id: 3,
-                        name: 'Surabaya',
-                        imageUrl: 'assets/images/city3_surabaya.png',
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    CityCard(
-                      City(
-                        id: 4,
-                        name: 'Palembang',
-                        imageUrl: 'assets/images/city4_palembang.png',
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    CityCard(
-                      City(
-                        id: 5,
-                        name: 'Aceh',
-                        imageUrl: 'assets/images/city5_aceh.png',
-                        isFavorite: true,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    CityCard(
-                      City(
-                        id: 6,
-                        name: 'Bogor',
-                        imageUrl: 'assets/images/city6_bogor.png',
-                      ),
-                    ),
-                    SizedBox(
-                      width: 24,
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    'Popular Cities',
+                    style: regulerTextStyle,
+                  ),
+                ],
               ),
-              // NOTE: End of Popular Cities
-              // NOTE: Recommended Space Section
-              Padding(
-                padding: EdgeInsets.only(
-                  left: paddingEdge,
-                  right: paddingEdge,
-                  top: 30,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Recommended Space',
-                      style: regulerTextStyle,
+            ),
+            // NOTE: ListView Popular Cities
+            Container(
+              height: 150,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  SizedBox(
+                    width: 24,
+                  ),
+                  CityCard(
+                    City(
+                      id: 1,
+                      name: 'Jakarta',
+                      imageUrl: 'assets/images/city1_jakarta.png',
                     ),
-                    SizedBox(
-                      height: 16,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CityCard(
+                    City(
+                      id: 2,
+                      name: 'Bandung',
+                      imageUrl: 'assets/images/city2_bandung.png',
+                      isFavorite: true,
                     ),
-                    Container(
-                      height: 200,
-                      child: ListView(
-                        scrollDirection: Axis.vertical,
-                        children: [
-                          SpaceCard(),
-                        ],
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CityCard(
+                    City(
+                      id: 3,
+                      name: 'Surabaya',
+                      imageUrl: 'assets/images/city3_surabaya.png',
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CityCard(
+                    City(
+                      id: 4,
+                      name: 'Palembang',
+                      imageUrl: 'assets/images/city4_palembang.png',
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CityCard(
+                    City(
+                      id: 5,
+                      name: 'Aceh',
+                      imageUrl: 'assets/images/city5_aceh.png',
+                      isFavorite: true,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CityCard(
+                    City(
+                      id: 6,
+                      name: 'Bogor',
+                      imageUrl: 'assets/images/city6_bogor.png',
+                    ),
+                  ),
+                  SizedBox(
+                    width: 24,
+                  ),
+                ],
+              ),
+            ),
+            // NOTE: End of Popular Cities
+            // NOTE: Recommended Space Section
+            Padding(
+              padding: EdgeInsets.only(
+                left: paddingEdge,
+                right: paddingEdge,
+                top: 30,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Recommended Space',
+                    style: regulerTextStyle,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Column(
+                    children: [
+                      SpaceCard(),
+                      SizedBox(
+                        height: 30,
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      'Tips & Guidance',
-                      style: regulerTextStyle,
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    // ListView(
-                    //   children: [],
-                    // ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                      SpaceCard(),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      SpaceCard(),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    'Tips & Guidance',
+                    style: regulerTextStyle,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  // ListView(
+                  //   children: [],
+                  // ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

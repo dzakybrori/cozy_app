@@ -50,7 +50,53 @@ class SpaceCard extends StatelessWidget {
               ],
             ),
           ),
-        )
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Kuretakeso Hott',
+              style: titleTextStyle.copyWith(
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(
+              height: 2,
+            ),
+            Text.rich(
+              TextSpan(
+                text: '\$52',
+                children: [
+                  TextSpan(
+                    text: ' / month',
+                    style: subTitleTextStyle.copyWith(
+                      color: greySubTextColor,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+                style: titleTextStyle.copyWith(
+                  fontSize: 16,
+                  color: primaryColor,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Bandung, Germany',
+              style: subTitleTextStyle.copyWith(
+                fontSize: 14,
+                color: greySubTextColor,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
