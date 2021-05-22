@@ -14,7 +14,7 @@ class CityCard extends StatelessWidget {
       child: Container(
         height: 150,
         width: 120,
-        color: Color(0XFFF6F7F8),
+        color: Colors.black12.withOpacity(0.06),
         child: Column(
           children: [
             Stack(

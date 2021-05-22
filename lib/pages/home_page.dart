@@ -3,6 +3,7 @@ import 'package:cozy_app/theme.dart';
 import 'package:cozy_app/widgets/city_card.dart';
 import 'package:cozy_app/widgets/space_card.dart';
 import 'package:cozy_app/widgets/tips_card.dart';
+import 'package:cozy_app/widgets/bottom_navbar_item.dart';
 import 'package:cozy_app/models/city.dart';
 import 'package:cozy_app/models/space.dart';
 import 'package:cozy_app/models/tips.dart';
@@ -238,14 +239,53 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 95,
                   ),
+                  // NOTE: End of Recommended Space
+                  // NOTE: Bottom NavBar
                 ],
               ),
             )
           ],
         ),
       ),
+      floatingActionButton: Container(
+        height: 65,
+        width: MediaQuery.of(context).size.width - (2 * paddingEdge),
+        margin: EdgeInsets.symmetric(horizontal: paddingEdge),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(23),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black12.withOpacity(0.06),
+            borderRadius: BorderRadius.circular(23),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BottomNavbarItem(
+                imageUrl: 'assets/images/icon_home.png',
+                isActive: true,
+              ),
+              BottomNavbarItem(
+                imageUrl: 'assets/images/icon_mail.png',
+                isActive: false,
+              ),
+              BottomNavbarItem(
+                imageUrl: 'assets/images/icon_card.png',
+                isActive: false,
+              ),
+              BottomNavbarItem(
+                imageUrl: 'assets/images/icon_love.png',
+                isActive: false,
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
