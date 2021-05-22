@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cozy_app/theme.dart';
+import 'package:cozy_app/models/space.dart';
 
 class SpaceCard extends StatelessWidget {
+  final Space space;
+
+  SpaceCard(this.space);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -14,7 +19,7 @@ class SpaceCard extends StatelessWidget {
             child: Stack(
               children: [
                 Image.asset(
-                  'assets/images/space1.png',
+                  space.imageUrl,
                 ),
                 Align(
                   alignment: Alignment.topRight,
@@ -39,7 +44,7 @@ class SpaceCard extends StatelessWidget {
                             height: 18,
                           ),
                           Text(
-                            '4/5',
+                            '${space.rating}/5',
                             style: btnTextStyle.copyWith(fontSize: 13),
                           ),
                         ],
@@ -59,7 +64,7 @@ class SpaceCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Kuretakeso Hott',
+              space.name,
               style: titleTextStyle.copyWith(
                 fontSize: 18,
               ),
@@ -69,7 +74,7 @@ class SpaceCard extends StatelessWidget {
             ),
             Text.rich(
               TextSpan(
-                text: '\$52',
+                text: '\$${space.price}',
                 children: [
                   TextSpan(
                     text: ' / month',
@@ -89,7 +94,7 @@ class SpaceCard extends StatelessWidget {
               height: 16,
             ),
             Text(
-              'Bandung, Germany',
+              '${space.city}, ${space.country}',
               style: subTitleTextStyle.copyWith(
                 fontSize: 14,
                 color: greySubTextColor,

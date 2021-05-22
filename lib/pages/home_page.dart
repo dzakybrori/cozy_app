@@ -3,6 +3,7 @@ import 'package:cozy_app/theme.dart';
 import 'package:cozy_app/widgets/city_card.dart';
 import 'package:cozy_app/widgets/space_card.dart';
 import 'package:cozy_app/models/city.dart';
+import 'package:cozy_app/models/space.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -143,15 +144,59 @@ class HomePage extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      SpaceCard(),
+                      SpaceCard(
+                        Space(
+                          id: 1,
+                          name: 'Kuretakeso Hott',
+                          imageUrl: 'assets/images/space1.png',
+                          price: 52.0,
+                          city: 'Bandung',
+                          country: 'Germany',
+                          rating: 4,
+                        ),
+                      ),
                       SizedBox(
                         height: 30,
                       ),
-                      SpaceCard(),
+                      SpaceCard(
+                        Space(
+                          id: 2,
+                          name: 'Roemah Nenek',
+                          imageUrl: 'assets/images/space2.png',
+                          price: 11.0,
+                          city: 'Seattle',
+                          country: 'Bogor',
+                          rating: 5,
+                        ),
+                      ),
                       SizedBox(
                         height: 30,
                       ),
-                      SpaceCard(),
+                      SpaceCard(
+                        Space(
+                          id: 3,
+                          name: 'Darrling How',
+                          imageUrl: 'assets/images/space3.png',
+                          price: 20.0,
+                          city: 'Jakarta',
+                          country: 'Indonesia',
+                          rating: 3,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      SpaceCard(
+                        Space(
+                          id: 4,
+                          name: 'Orange Crown',
+                          imageUrl: 'assets/images/space4.png',
+                          price: 552.0,
+                          city: 'Halla',
+                          country: 'Sumatra',
+                          rating: 5,
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(
