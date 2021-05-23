@@ -1,3 +1,4 @@
+import 'package:cozy_app/pages/error_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cozy_app/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,7 +17,12 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     void launchURL(String url) async => await canLaunch(url)
         ? await launch(url)
-        : throw 'Could not launch $url';
+        : Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ErrorPage(),
+            ),
+          );
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -231,8 +237,8 @@ class DetailPage extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    launchURL(
-                                        'https://goo.gl/maps/c9DNdN65Tr5gMu4KA');
+                                    launchURL('agwuhuiw');
+                                    //https://goo.gl/maps/c9DNdN65Tr5gMu4KA
                                   },
                                   child: Image.asset(
                                     'assets/images/btn_map.png',
