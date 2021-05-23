@@ -1,6 +1,7 @@
-import 'package:cozy_app/theme.dart';
-import 'package:cozy_app/widgets/facility_item.dart';
 import 'package:flutter/material.dart';
+import 'package:cozy_app/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:cozy_app/widgets/facility_item.dart';
 
 class DetailPage extends StatelessWidget {
   final List<String> photos = <String>[
@@ -13,6 +14,10 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void launchURL(String url) async => await canLaunch(url)
+        ? await launch(url)
+        : throw 'Could not launch $url';
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -224,9 +229,15 @@ class DetailPage extends StatelessWidget {
                                     color: greySubTextColor,
                                   ),
                                 ),
-                                Image.asset(
-                                  'assets/images/btn_map.png',
-                                  width: 40,
+                                InkWell(
+                                  onTap: () {
+                                    launchURL(
+                                        'https://goo.gl/maps/c9DNdN65Tr5gMu4KA');
+                                  },
+                                  child: Image.asset(
+                                    'assets/images/btn_map.png',
+                                    width: 40,
+                                  ),
                                 ),
                               ],
                             ),
@@ -237,7 +248,9 @@ class DetailPage extends StatelessWidget {
                               height: 50,
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  launchURL('tel:+6285707965768');
+                                },
                                 child: Text(
                                   'Book Now',
                                   style: btnTextStyle,
