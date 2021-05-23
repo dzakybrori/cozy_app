@@ -14,6 +14,7 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         bottom: false,
         child: Stack(
@@ -194,6 +195,64 @@ class DetailPage extends StatelessWidget {
                         ),
                       ),
                       // END OF PHOTOS SECTION
+                      Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 40,
+                          left: paddingEdge,
+                          right: paddingEdge,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              'Location',
+                              style: regulerTextStyle,
+                            ),
+                            SizedBox(
+                              height: 6,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Jln. Kappan Sukses No. 20\nPalembang',
+                                  style: regulerTextStyle.copyWith(
+                                    fontSize: 14,
+                                    color: greySubTextColor,
+                                  ),
+                                ),
+                                Image.asset(
+                                  'assets/images/btn_map.png',
+                                  width: 40,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            Container(
+                              height: 50,
+                              width: MediaQuery.of(context).size.width,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Book Now',
+                                  style: btnTextStyle,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(17),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
