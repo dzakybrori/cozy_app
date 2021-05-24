@@ -1,3 +1,4 @@
+import 'package:cozy_app/provider/space_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cozy_app/theme.dart';
 import 'package:cozy_app/widgets/city_card.dart';
@@ -7,10 +8,13 @@ import 'package:cozy_app/widgets/bottom_navbar_item.dart';
 import 'package:cozy_app/models/city.dart';
 import 'package:cozy_app/models/space.dart';
 import 'package:cozy_app/models/tips.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var spaceProvider = Provider.of<SpaceProvider>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
