@@ -149,65 +149,29 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 16,
                   ),
-                  Column(
-                    children: [
-                      SpaceCard(
-                        Space(
-                          id: 1,
-                          name: 'Kuretakeso Hott',
-                          imageUrl: 'assets/images/space1.png',
-                          price: 52,
-                          city: 'Bandung',
-                          country: 'Germany',
-                          rating: 4,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      SpaceCard(
-                        Space(
-                          id: 2,
-                          name: 'Roemah Nenek',
-                          imageUrl: 'assets/images/space2.png',
-                          price: 11,
-                          city: 'Seattle',
-                          country: 'Bogor',
-                          rating: 5,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      SpaceCard(
-                        Space(
-                          id: 3,
-                          name: 'Darrling How',
-                          imageUrl: 'assets/images/space3.png',
-                          price: 20,
-                          city: 'Jakarta',
-                          country: 'Indonesia',
-                          rating: 3,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      SpaceCard(
-                        Space(
-                          id: 4,
-                          name: 'Orange Crown',
-                          imageUrl: 'assets/images/space4.png',
-                          price: 552,
-                          city: 'Halla',
-                          country: 'Sumatra',
-                          rating: 5,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
+                  FutureBuilder(
+                    future: spaceProvider.getRecommendedSpaces(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List<Space> data = snapshot.data;
+
+                        return Column(
+                          children:
+                              data.map((item) => SpaceCard(item)).toList(),
+                        );
+                      } else {
+                        return Center(
+                          child: Column(
+                            children: [
+                              CircularProgressIndicator(),
+                              SizedBox(
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
                   ),
                   Text(
                     'Tips & Guidance',

@@ -1,4 +1,3 @@
-import 'package:cozy_app/theme.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavbarItem extends StatelessWidget {
