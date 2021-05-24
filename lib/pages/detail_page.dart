@@ -1,3 +1,4 @@
+import 'package:cozy_app/models/space.dart';
 import 'package:cozy_app/pages/error_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cozy_app/theme.dart';
@@ -5,13 +6,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:cozy_app/widgets/facility_item.dart';
 
 class DetailPage extends StatelessWidget {
-  final List<String> photos = <String>[
-    'assets/images/photo1.png',
-    'assets/images/photo2.png',
-    'assets/images/photo3.png',
-    'assets/images/photo4.png',
-    'assets/images/photo5.png',
-  ];
+  final Space space;
+
+  DetailPage(this.space);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +27,8 @@ class DetailPage extends StatelessWidget {
         bottom: false,
         child: Stack(
           children: [
-            Image.asset(
-              'assets/images/thumbnail.png',
+            Image.network(
+              space.imageUrl,
               width: MediaQuery.of(context).size.width,
               height: 350,
               fit: BoxFit.cover,
@@ -68,14 +65,14 @@ class DetailPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Kuretakeso Hott',
+                                      space.name,
                                       style: titleTextStyle.copyWith(
                                         fontSize: 22,
                                       ),
                                     ),
                                     Text.rich(
                                       TextSpan(
-                                        text: '\$52',
+                                        text: '\$${space.price}',
                                         children: [
                                           TextSpan(
                                             text: ' / month',
@@ -151,17 +148,17 @@ class DetailPage extends StatelessWidget {
                                 FacilityItem(
                                   imageUrl: 'assets/images/icon_kitchen.png',
                                   name: 'Kitchen',
-                                  total: 2,
+                                  total: space.totalKitchens,
                                 ),
                                 FacilityItem(
                                   imageUrl: 'assets/images/icon_bedroom.png',
                                   name: 'Bedroom',
-                                  total: 3,
+                                  total: space.totalBedroom,
                                 ),
                                 FacilityItem(
                                   imageUrl: 'assets/images/icon_cupboard.png',
                                   name: 'Big Lemari',
-                                  total: 2,
+                                  total: space.totalCupBoard,
                                 ),
                               ],
                             ),
@@ -183,19 +180,19 @@ class DetailPage extends StatelessWidget {
                         height: 88,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: photos.length,
+                          itemCount: space.photos.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: EdgeInsets.only(
                                 left: (index == 0) ? paddingEdge : 0,
-                                right: (index == (photos.length - 1))
+                                right: (index == (space.photos.length - 1))
                                     ? paddingEdge
                                     : 18,
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
-                                child: Image.asset(
-                                  photos[index],
+                                child: Image.network(
+                                  space.photos[index],
                                   width: 110,
                                   height: 88,
                                   fit: BoxFit.cover,
@@ -229,7 +226,7 @@ class DetailPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Jln. Kappan Sukses No. 20\nPalembang',
+                                  '${space.address}\n${space.city}',
                                   style: regulerTextStyle.copyWith(
                                     fontSize: 14,
                                     color: greySubTextColor,
@@ -237,7 +234,7 @@ class DetailPage extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    launchURL('agwuhuiw');
+                                    launchURL(space.mapUrl);
                                     //https://goo.gl/maps/c9DNdN65Tr5gMu4KA
                                   },
                                   child: Image.asset(
@@ -255,7 +252,7 @@ class DetailPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  launchURL('tel:+6285707965768');
+                                  launchURL('tel:${space.phone}');
                                 },
                                 child: Text(
                                   'Book Now',
