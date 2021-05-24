@@ -1,5 +1,6 @@
 import 'package:cozy_app/models/space.dart';
 import 'package:cozy_app/pages/error_page.dart';
+import 'package:cozy_app/widgets/rating_item.dart';
 import 'package:flutter/material.dart';
 import 'package:cozy_app/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -91,44 +92,19 @@ class DetailPage extends StatelessWidget {
                                   ],
                                 ),
                                 Row(
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/icon_star_active.png',
-                                      width: 20,
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Image.asset(
-                                      'assets/images/icon_star_active.png',
-                                      width: 20,
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Image.asset(
-                                      'assets/images/icon_star_active.png',
-                                      width: 20,
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Image.asset(
-                                      'assets/images/icon_star_active.png',
-                                      width: 20,
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Image.asset(
-                                      'assets/images/icon_star_active.png',
-                                      width: 20,
-                                      color: Color(0XFF989BA1),
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                  ],
+                                  children: [1, 2, 3, 4, 5]
+                                      .map(
+                                        (index) => Container(
+                                          margin: EdgeInsets.only(
+                                            left: 2,
+                                          ),
+                                          child: RatingItem(
+                                            index: index,
+                                            rating: space.rating,
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
                                 )
                               ],
                             ),

@@ -57,7 +57,7 @@ class SpaceCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/images/icon_star_active.png',
+                                  'assets/images/icon_star.png',
                                   width: 18,
                                   height: 18,
                                 ),
