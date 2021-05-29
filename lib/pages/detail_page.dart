@@ -6,10 +6,17 @@ import 'package:cozy_app/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cozy_app/widgets/facility_item.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final Space space;
 
   DetailPage(this.space);
+
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  bool isWhished = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class DetailPage extends StatelessWidget {
         child: Stack(
           children: [
             Image.network(
-              space.imageUrl,
+              widget.space.imageUrl,
               width: MediaQuery.of(context).size.width,
               height: 350,
               fit: BoxFit.cover,
@@ -66,14 +73,14 @@ class DetailPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      space.name,
+                                      widget.space.name,
                                       style: titleTextStyle.copyWith(
                                         fontSize: 22,
                                       ),
                                     ),
                                     Text.rich(
                                       TextSpan(
-                                        text: '\$${space.price}',
+                                        text: '\$${widget.space.price}',
                                         children: [
                                           TextSpan(
                                             text: ' / month',
@@ -100,7 +107,7 @@ class DetailPage extends StatelessWidget {
                                           ),
                                           child: RatingItem(
                                             index: index,
-                                            rating: space.rating,
+                                            rating: widget.space.rating,
                                           ),
                                         ),
                                       )
@@ -124,17 +131,17 @@ class DetailPage extends StatelessWidget {
                                 FacilityItem(
                                   imageUrl: 'assets/images/icon_kitchen.png',
                                   name: 'Kitchen',
-                                  total: space.totalKitchens,
+                                  total: widget.space.totalKitchens,
                                 ),
                                 FacilityItem(
                                   imageUrl: 'assets/images/icon_bedroom.png',
                                   name: 'Bedroom',
-                                  total: space.totalBedroom,
+                                  total: widget.space.totalBedroom,
                                 ),
                                 FacilityItem(
                                   imageUrl: 'assets/images/icon_cupboard.png',
                                   name: 'Big Lemari',
-                                  total: space.totalCupBoard,
+                                  total: widget.space.totalCupBoard,
                                 ),
                               ],
                             ),
@@ -156,19 +163,20 @@ class DetailPage extends StatelessWidget {
                         height: 88,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: space.photos.length,
+                          itemCount: widget.space.photos.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: EdgeInsets.only(
                                 left: (index == 0) ? paddingEdge : 0,
-                                right: (index == (space.photos.length - 1))
-                                    ? paddingEdge
-                                    : 18,
+                                right:
+                                    (index == (widget.space.photos.length - 1))
+                                        ? paddingEdge
+                                        : 18,
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
                                 child: Image.network(
-                                  space.photos[index],
+                                  widget.space.photos[index],
                                   width: 110,
                                   height: 88,
                                   fit: BoxFit.cover,
@@ -202,7 +210,7 @@ class DetailPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '${space.address}\n${space.city}',
+                                  '${widget.space.address}\n${widget.space.city}',
                                   style: regulerTextStyle.copyWith(
                                     fontSize: 14,
                                     color: greySubTextColor,
@@ -210,7 +218,7 @@ class DetailPage extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    launchURL(space.mapUrl);
+                                    launchURL(widget.space.mapUrl);
                                     //https://goo.gl/maps/c9DNdN65Tr5gMu4KA
                                   },
                                   child: Image.asset(
@@ -228,7 +236,7 @@ class DetailPage extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  launchURL('tel:${space.phone}');
+                                  launchURL('tel:${widget.space.phone}');
                                 },
                                 child: Text(
                                   'Book Now',
@@ -274,10 +282,17 @@ class DetailPage extends StatelessWidget {
                             height: 40,
                           ),
                         ),
-                        Image.asset(
-                          'assets/images/btn_wishlist_inactive.png',
-                          width: 40,
-                          height: 40,
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              isWhished = !isWhished;
+                            });
+                          },
+                          child: Image.asset(
+                            isWhished ? 'assets/images/btn_wishlist_active.png' : 'assets/images/btn_wishlist_inactive.png',
+                            width: 40,
+                            height: 40,
+                          ),
                         ),
                       ],
                     ),
