@@ -29,6 +29,34 @@ class _DetailPageState extends State<DetailPage> {
             ),
           );
 
+    Future<void> showConfirmation() async {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Konfirmasi'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: [
+                  Text('Apakah kamu ingin menghubungi pemilik kos?'),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('Batal'),
+              ),
+              TextButton(
+                onPressed: () => launchURL('tel:${widget.space.phone}'),
+                child: Text('Hubungi'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -236,7 +264,7 @@ class _DetailPageState extends State<DetailPage> {
                               width: MediaQuery.of(context).size.width,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  launchURL('tel:${widget.space.phone}');
+                                  showConfirmation();
                                 },
                                 child: Text(
                                   'Book Now',
@@ -289,7 +317,9 @@ class _DetailPageState extends State<DetailPage> {
                             });
                           },
                           child: Image.asset(
-                            isWhished ? 'assets/images/btn_wishlist_active.png' : 'assets/images/btn_wishlist_inactive.png',
+                            isWhished
+                                ? 'assets/images/btn_wishlist_active.png'
+                                : 'assets/images/btn_wishlist_inactive.png',
                             width: 40,
                             height: 40,
                           ),
