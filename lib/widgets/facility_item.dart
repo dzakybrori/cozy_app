@@ -1,5 +1,6 @@
 import 'package:cozy_app/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FacilityItem extends StatelessWidget {
   final String name;
@@ -15,12 +16,10 @@ class FacilityItem extends StatelessWidget {
       children: [
         Image.asset(
           imageUrl,
-          width: 32,
-          height: 32,
+          width: 38.r,
+          height: 38.r,
         ),
-        SizedBox(
-          height: 8,
-        ),
+        SizedBox(height: 8.h),
         Text.rich(
           TextSpan(
             text: '$total',
@@ -29,12 +28,12 @@ class FacilityItem extends StatelessWidget {
                 text: ' $name',
                 style: subTitleTextStyle.copyWith(
                   color: greySubTextColor,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ],
             style: titleTextStyle.copyWith(
-              fontSize: 14,
+              fontSize: 16.sp,
               color: primaryColor,
             ),
           ),

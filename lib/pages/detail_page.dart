@@ -1,10 +1,11 @@
 import 'package:cozy_app/models/space.dart';
 import 'package:cozy_app/pages/error_page.dart';
+import 'package:cozy_app/theme.dart';
+import 'package:cozy_app/widgets/facility_item.dart';
 import 'package:cozy_app/widgets/rating_item.dart';
 import 'package:flutter/material.dart';
-import 'package:cozy_app/theme.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:cozy_app/widgets/facility_item.dart';
 
 class DetailPage extends StatefulWidget {
   final Space space;
@@ -66,20 +67,21 @@ class _DetailPageState extends State<DetailPage> {
             Image.network(
               widget.space.imageUrl,
               width: MediaQuery.of(context).size.width,
-              height: 350,
+              height: 350.h,
               fit: BoxFit.cover,
             ),
             ListView(
+              physics: BouncingScrollPhysics(),
               children: [
                 SizedBox(
-                  height: 328,
+                  height: 328.h,
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
+                      top: Radius.circular(20.w),
                     ),
                   ),
                   child: Column(
@@ -87,9 +89,9 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          top: 30,
-                          left: paddingEdge,
-                          right: paddingEdge,
+                          top: 30.h,
+                          left: paddingEdge.w,
+                          right: paddingEdge.w,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +105,7 @@ class _DetailPageState extends State<DetailPage> {
                                     Text(
                                       widget.space.name,
                                       style: titleTextStyle.copyWith(
-                                        fontSize: 22,
+                                        fontSize: 22.sp,
                                       ),
                                     ),
                                     Text.rich(
@@ -114,12 +116,12 @@ class _DetailPageState extends State<DetailPage> {
                                             text: ' / month',
                                             style: subTitleTextStyle.copyWith(
                                               color: greySubTextColor,
-                                              fontSize: 16,
+                                              fontSize: 16.sp,
                                             ),
                                           ),
                                         ],
                                         style: titleTextStyle.copyWith(
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           color: primaryColor,
                                         ),
                                       ),
@@ -131,7 +133,7 @@ class _DetailPageState extends State<DetailPage> {
                                       .map(
                                         (index) => Container(
                                           margin: EdgeInsets.only(
-                                            left: 2,
+                                            left: 2.w,
                                           ),
                                           child: RatingItem(
                                             index: index,
@@ -143,16 +145,12 @@ class _DetailPageState extends State<DetailPage> {
                                 )
                               ],
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: 30.h),
                             Text(
                               'Main Facilities',
                               style: regulerTextStyle,
                             ),
-                            SizedBox(
-                              height: 12,
-                            ),
+                            SizedBox(height: 12.h),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -173,40 +171,37 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: 30.h),
                             Text(
                               'Photos',
                               style: regulerTextStyle,
                             ),
-                            SizedBox(
-                              height: 12,
-                            ),
+                            SizedBox(height: 12.h),
                           ],
                         ),
                       ),
                       // NOTE: PHOTOS SECTION
                       Container(
-                        height: 88,
+                        height: 108.r,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: widget.space.photos.length,
+                          physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: EdgeInsets.only(
-                                left: (index == 0) ? paddingEdge : 0,
+                                left: (index == 0) ? paddingEdge.w : 0,
                                 right:
                                     (index == (widget.space.photos.length - 1))
-                                        ? paddingEdge
-                                        : 18,
+                                        ? paddingEdge.w
+                                        : 18.w,
                               ),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(16.w),
                                 child: Image.network(
                                   widget.space.photos[index],
-                                  width: 110,
-                                  height: 88,
+                                  width: 135.r,
+                                  height: 108.r,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -217,30 +212,26 @@ class _DetailPageState extends State<DetailPage> {
                       // END OF PHOTOS SECTION
                       Padding(
                         padding: EdgeInsets.only(
-                          bottom: 40,
-                          left: paddingEdge,
-                          right: paddingEdge,
+                          bottom: 40.h,
+                          left: paddingEdge.w,
+                          right: paddingEdge.w,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              height: 30,
-                            ),
+                            SizedBox(height: 30.h),
                             Text(
                               'Location',
                               style: regulerTextStyle,
                             ),
-                            SizedBox(
-                              height: 6,
-                            ),
+                            SizedBox(height: 6.h),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   '${widget.space.address}\n${widget.space.city}',
                                   style: regulerTextStyle.copyWith(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     color: greySubTextColor,
                                   ),
                                 ),
@@ -251,14 +242,12 @@ class _DetailPageState extends State<DetailPage> {
                                   },
                                   child: Image.asset(
                                     'assets/images/btn_map.png',
-                                    width: 40,
+                                    width: 40.w,
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 40,
-                            ),
+                            SizedBox(height: 40.h),
                             Container(
                               height: 50,
                               width: MediaQuery.of(context).size.width,
@@ -273,7 +262,7 @@ class _DetailPageState extends State<DetailPage> {
                                 style: ElevatedButton.styleFrom(
                                   primary: primaryColor,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(17),
+                                    borderRadius: BorderRadius.circular(17.w),
                                   ),
                                 ),
                               ),
@@ -288,13 +277,11 @@ class _DetailPageState extends State<DetailPage> {
             ),
             Container(
               padding: EdgeInsets.symmetric(
-                horizontal: paddingEdge,
+                horizontal: paddingEdge.w,
               ),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 30,
-                  ),
+                  SizedBox(height: 30.h),
                   Align(
                     alignment: Alignment.topCenter,
                     child: Row(
@@ -306,8 +293,8 @@ class _DetailPageState extends State<DetailPage> {
                           },
                           child: Image.asset(
                             'assets/images/btn_back.png',
-                            width: 40,
-                            height: 40,
+                            width: 46.r,
+                            height: 46.r,
                           ),
                         ),
                         InkWell(
@@ -320,8 +307,8 @@ class _DetailPageState extends State<DetailPage> {
                             isWhished
                                 ? 'assets/images/btn_wishlist_active.png'
                                 : 'assets/images/btn_wishlist_inactive.png',
-                            width: 40,
-                            height: 40,
+                            width: 46.r,
+                            height: 46.r,
                           ),
                         ),
                       ],
