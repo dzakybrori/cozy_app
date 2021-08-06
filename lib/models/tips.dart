@@ -1,10 +1,10 @@
 class Tips {
-  int id;
-  String title;
-  String imageUrl;
-  String updatedAt;
+  final int id;
+  final String title;
+  final String imageUrl;
+  final String updatedAt;
 
-  Tips({
+  const Tips({
     this.id,
     this.title,
     this.imageUrl,

@@ -12,6 +12,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
+  static const List<Tips> mTipsList = [
+    const Tips(
+      id: 1,
+      title: 'City Guidelines',
+      imageUrl: 'assets/images/icon_tips1.png',
+      updatedAt: '20 Apr',
+    ),
+    const Tips(
+      id: 2,
+      title: 'Jakarta Fairship',
+      imageUrl: 'assets/images/icon_tips2.png',
+      updatedAt: '11 Dec',
+    ),
+  ];
+
   static const List<City> mCityList = [
     const City(
       id: 1,
@@ -152,37 +167,18 @@ class HomePage extends StatelessWidget {
                     'Tips & Guidance',
                     style: regulerTextStyle,
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Column(
-                    children: [
-                      TipsCard(
-                        Tips(
-                          id: 1,
-                          title: 'City Guidelines',
-                          imageUrl: 'assets/images/icon_tips1.png',
-                          updatedAt: '20 Apr',
-                        ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: mTipsList.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => Padding(
+                      padding: EdgeInsets.only(
+                        top: (index == 0) ? 16.h : 0,
+                        bottom:
+                            (index == (mTipsList.length - 1)) ? 120.h : 20.h,
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TipsCard(
-                        Tips(
-                          id: 2,
-                          title: 'Jakarta Fairship',
-                          imageUrl: 'assets/images/icon_tips2.png',
-                          updatedAt: '11 Dec',
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 95,
+                      child: TipsCard(mTipsList[index]),
+                    ),
                   ),
                   // NOTE: End of Recommended Space
                   // NOTE: Bottom NavBar
