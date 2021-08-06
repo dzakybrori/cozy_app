@@ -15,8 +15,8 @@ class CityCard extends StatelessWidget {
       child: InkWell(
         onTap: () {},
         child: Container(
-          height: 150.h,
-          width: 120.w,
+          height: 150.r,
+          width: 120.r,
           color: Colors.black12.withOpacity(0.06),
           child: Column(
             children: [
@@ -24,16 +24,15 @@ class CityCard extends StatelessWidget {
                 children: [
                   Image.asset(
                     city.imageUrl,
-                    width: 120.w,
-                    height: 102.h,
+                    height: 102.r,
                     fit: BoxFit.cover,
                   ),
                   if (city.isFavorite)
                     Align(
                       alignment: Alignment.topRight,
                       child: Container(
-                        width: 50.w,
-                        height: 30.h,
+                        width: 50.r,
+                        height: 30.r,
                         decoration: BoxDecoration(
                           color: primaryColor,
                           borderRadius: BorderRadius.only(
@@ -54,9 +53,7 @@ class CityCard extends StatelessWidget {
                     ),
                 ],
               ),
-              SizedBox(
-                height: 11.h,
-              ),
+              SizedBox(height: 11.h),
               Text(
                 city.name,
                 style: titleTextStyle.copyWith(
