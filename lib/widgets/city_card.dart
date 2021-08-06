@@ -14,6 +14,7 @@ class CityCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(18.w),
       child: InkWell(
         onTap: () {},
+        borderRadius: BorderRadius.circular(18.w),
         child: Container(
           height: 150.r,
           width: 120.r,

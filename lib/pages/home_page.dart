@@ -146,18 +146,16 @@ class HomePage extends StatelessWidget {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: data.length,
-                          itemBuilder: (context, index) =>
-                              SpaceCard(data[index]),
+                          itemBuilder: (context, index) => Padding(
+                            padding: EdgeInsets.only(bottom: 30.h),
+                            child: SpaceCard(data[index]),
+                          ),
                         );
                       } else {
-                        return Center(
-                          child: Column(
-                            children: [
-                              CircularProgressIndicator(),
-                              SizedBox(
-                                height: 30.h,
-                              ),
-                            ],
+                        return SizedBox(
+                          height: 200.h,
+                          child: Center(
+                            child: CircularProgressIndicator(),
                           ),
                         );
                       }
