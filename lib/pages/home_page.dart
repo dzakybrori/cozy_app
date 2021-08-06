@@ -175,7 +175,7 @@ class HomePage extends StatelessWidget {
                       padding: EdgeInsets.only(
                         top: (index == 0) ? 16.h : 0,
                         bottom:
-                            (index == (mTipsList.length - 1)) ? 120.h : 20.h,
+                            (index == (mTipsList.length - 1)) ? 110.h : 20.h,
                       ),
                       child: TipsCard(mTipsList[index]),
                     ),
@@ -189,17 +189,17 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: Container(
-        height: 65,
-        width: MediaQuery.of(context).size.width - (2 * paddingEdge),
-        margin: EdgeInsets.symmetric(horizontal: paddingEdge),
+        height: 65.h,
+        width: MediaQuery.of(context).size.width - (2 * paddingEdge.w),
+        margin: EdgeInsets.symmetric(horizontal: paddingEdge.w, vertical: 4.h),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(23),
+          borderRadius: BorderRadius.circular(23.w),
         ),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.black12.withOpacity(0.06),
-            borderRadius: BorderRadius.circular(23),
+            borderRadius: BorderRadius.circular(23.w),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

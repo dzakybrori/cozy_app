@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BottomNavbarItem extends StatelessWidget {
   final String imageUrl;
@@ -13,13 +14,13 @@ class BottomNavbarItem extends StatelessWidget {
         Spacer(),
         Image.asset(
           imageUrl,
-          width: 26,
+          width: 26.w,
         ),
         Spacer(),
         isActive
             ? Container(
-                width: 30,
-                height: 2,
+                width: 30.w,
+                height: 4.r,
                 decoration: BoxDecoration(
                   color: Color(0XFF7F74EB),
                   borderRadius: BorderRadius.vertical(
