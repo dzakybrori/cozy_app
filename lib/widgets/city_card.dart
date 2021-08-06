@@ -16,8 +16,8 @@ class CityCard extends StatelessWidget {
         onTap: () {},
         borderRadius: BorderRadius.circular(18.w),
         child: Container(
-          height: 150.r,
-          width: 120.r,
+          height: 175.r,
+          width: 140.r,
           color: Colors.black12.withOpacity(0.06),
           child: Column(
             children: [
@@ -25,7 +25,7 @@ class CityCard extends StatelessWidget {
                 children: [
                   Image.asset(
                     city.imageUrl,
-                    height: 102.r,
+                    height: 119.r,
                     fit: BoxFit.cover,
                   ),
                   if (city.isFavorite)
@@ -54,11 +54,14 @@ class CityCard extends StatelessWidget {
                     ),
                 ],
               ),
-              SizedBox(height: 11.h),
-              Text(
-                city.name,
-                style: titleTextStyle.copyWith(
-                  fontSize: 16.sp,
+              Expanded(
+                child: Center(
+                  child: Text(
+                    city.name,
+                    style: titleTextStyle.copyWith(
+                      fontSize: 16.sp,
+                    ),
+                  ),
                 ),
               ),
             ],

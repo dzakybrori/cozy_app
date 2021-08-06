@@ -26,21 +26,21 @@ class SpaceCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(18.w),
             child: Container(
-              width: 130.w,
-              height: 110.h,
+              width: 156.r,
+              height: 126.r,
               child: Stack(
                 children: [
                   Image.network(
                     space.imageUrl,
-                    width: 130.w,
-                    height: 110.h,
+                    width: 156.r,
+                    height: 126.r,
                     fit: BoxFit.cover,
                   ),
                   Align(
                     alignment: Alignment.topRight,
                     child: Container(
-                      width: 70.r,
-                      height: 30.r,
+                      width: 73.r,
+                      height: 33.r,
                       decoration: BoxDecoration(
                         color: primaryColor,
                         borderRadius: BorderRadius.only(

@@ -107,7 +107,7 @@ class HomePage extends StatelessWidget {
             ),
             // NOTE: ListView Popular Cities
             Container(
-              height: 150.h,
+              height: 175.r,
               child: ListView.builder(
                 itemCount: mCityList.length,
                 scrollDirection: Axis.horizontal,
