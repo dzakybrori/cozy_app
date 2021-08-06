@@ -1,8 +1,8 @@
 class City {
-  int id;
-  String name;
-  String imageUrl;
-  bool isFavorite;
+  final int id;
+  final String name;
+  final String imageUrl;
+  final bool isFavorite;
 
-  City({this.id, this.name, this.imageUrl, this.isFavorite = false});
+  const City({this.id, this.name, this.imageUrl, this.isFavorite = false});
 }
