@@ -129,6 +129,7 @@ class HomePage extends StatelessWidget {
 
                         return ListView.builder(
                           shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           itemCount: data.length,
                           itemBuilder: (context, index) =>
                               SpaceCard(data[index]),

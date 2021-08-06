@@ -1,7 +1,8 @@
-import 'package:cozy_app/pages/detail_page.dart';
-import 'package:flutter/material.dart';
-import 'package:cozy_app/theme.dart';
 import 'package:cozy_app/models/space.dart';
+import 'package:cozy_app/pages/detail_page.dart';
+import 'package:cozy_app/theme.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SpaceCard extends StatelessWidget {
   final Space space;
@@ -19,65 +20,63 @@ class SpaceCard extends StatelessWidget {
           ),
         );
       },
-      child: Expanded(
-        child: Container(
-          padding: EdgeInsets.only(
-            bottom: 30,
-          ),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(18),
-                child: Container(
-                  width: 130,
-                  height: 110,
-                  child: Stack(
-                    children: [
-                      Image.network(
-                        space.imageUrl,
-                        width: 130,
-                        height: 110,
-                        fit: BoxFit.cover,
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Container(
-                          width: 70,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: primaryColor,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(36),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 6),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/images/icon_star.png',
-                                  width: 18,
-                                  height: 18,
-                                ),
-                                Text(
-                                  '${space.rating}/5',
-                                  style: btnTextStyle.copyWith(fontSize: 13),
-                                ),
-                              ],
-                            ),
+      child: Container(
+        padding: EdgeInsets.only(
+          bottom: 30.h,
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(18.w),
+              child: Container(
+                width: 130.w,
+                height: 110.h,
+                child: Stack(
+                  children: [
+                    Image.network(
+                      space.imageUrl,
+                      width: 130.w,
+                      height: 110.h,
+                      fit: BoxFit.cover,
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        width: 70.r,
+                        height: 30.r,
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(36.w),
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 6.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/icon_star.png',
+                                width: 18.r,
+                                height: 18.r,
+                              ),
+                              Text(
+                                '${space.rating}/5',
+                                style: btnTextStyle.copyWith(fontSize: 13.sp),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
-              Column(
+            ),
+            SizedBox(width: 20.w),
+            FittedBox(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -85,12 +84,10 @@ class SpaceCard extends StatelessWidget {
                     space.name,
                     overflow: TextOverflow.ellipsis,
                     style: titleTextStyle.copyWith(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                     ),
                   ),
-                  SizedBox(
-                    height: 2,
-                  ),
+                  SizedBox(height: 2.h),
                   Text.rich(
                     TextSpan(
                       text: '\$${space.price}',
@@ -99,30 +96,28 @@ class SpaceCard extends StatelessWidget {
                           text: ' / month',
                           style: subTitleTextStyle.copyWith(
                             color: greySubTextColor,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                           ),
                         ),
                       ],
                       style: titleTextStyle.copyWith(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: primaryColor,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  SizedBox(height: 16.h),
                   Text(
                     '${space.city}, ${space.country}',
                     style: subTitleTextStyle.copyWith(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: greySubTextColor,
                     ),
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
