@@ -105,55 +105,54 @@ class _DetailPageState extends State<DetailPage> {
 
   SliverAppBar _buildSliverAppBar() {
     return SliverAppBar(
-              elevation: 0,
-              stretch: true,
-              floating: true,
-              titleSpacing: 0,
-              forceElevated: false,
-              expandedHeight: 350.h,
-              backgroundColor: Colors.transparent,
-              foregroundColor: Colors.transparent,
-              automaticallyImplyLeading: false,
-              shadowColor: Colors.white,
-              flexibleSpace: FlexibleSpaceBar(
-                collapseMode: CollapseMode.pin,
-                stretchModes: const <StretchMode>[
-                  StretchMode.zoomBackground,
-                ],
-                background: Stack(
-                  fit: StackFit.expand,
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    Image.network(
-                      widget.space.imageUrl,
-                      fit: BoxFit.cover,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 35.h,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40.r),
-                            topRight: Radius.circular(40.r),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black38,
-                              spreadRadius: 8.r,
-                              blurRadius: 50.r,
-                              offset:
-                                  Offset(0, 0), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                      ),
+      elevation: 0,
+      stretch: true,
+      floating: true,
+      titleSpacing: 0,
+      forceElevated: false,
+      expandedHeight: 350.h,
+      backgroundColor: Colors.transparent,
+      foregroundColor: Colors.transparent,
+      automaticallyImplyLeading: false,
+      shadowColor: Colors.white,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.pin,
+        stretchModes: const <StretchMode>[
+          StretchMode.zoomBackground,
+        ],
+        background: Stack(
+          fit: StackFit.expand,
+          alignment: Alignment.bottomCenter,
+          children: [
+            Image.network(
+              widget.space.imageUrl,
+              fit: BoxFit.cover,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 35.h,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.r),
+                    topRight: Radius.circular(40.r),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black38,
+                      spreadRadius: 8.r,
+                      blurRadius: 50.r,
+                      offset: Offset(0, 0), // changes position of shadow
                     ),
                   ],
                 ),
               ),
-            );
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Padding _buildTopContent() {
@@ -281,8 +280,8 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Padding _buildLocationSection(void launchURL(String url), BuildContext context,
-      Future<void> showConfirmation()) {
+  Padding _buildLocationSection(void launchURL(String url),
+      BuildContext context, Future<void> showConfirmation()) {
     return Padding(
       padding: EdgeInsets.only(
         bottom: 40.h,
