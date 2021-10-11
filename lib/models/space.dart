@@ -1,50 +1,52 @@
 class Space {
-  int id;
-  String name;
-  String city;
-  String country;
-  int price;
-  String imageUrl;
-  int rating;
-  String address;
-  String phone;
-  String mapUrl;
-  List photos;
-  int totalKitchens;
-  int totalBedroom;
-  int totalCupBoard;
+  final int id;
+  final String name;
+  final String city;
+  final String country;
+  final int price;
+  final String imageUrl;
+  final int rating;
+  final String address;
+  final String phone;
+  final String mapUrl;
+  final List photos;
+  final int totalKitchens;
+  final int totalBedroom;
+  final int totalCupBoard;
+  late bool isFavorite;
 
   Space({
-    this.id,
-    this.name,
-    this.city,
-    this.country,
-    this.price,
-    this.imageUrl,
-    this.rating,
-    this.address,
-    this.phone,
-    this.mapUrl,
-    this.photos,
-    this.totalKitchens,
-    this.totalBedroom,
-    this.totalCupBoard,
+    required this.id,
+    required this.name,
+    required this.city,
+    required this.country,
+    required this.price,
+    required this.imageUrl,
+    required this.rating,
+    required this.address,
+    required this.phone,
+    required this.mapUrl,
+    required this.photos,
+    required this.totalKitchens,
+    required this.totalBedroom,
+    required this.totalCupBoard,
+    this.isFavorite = false,
   });
 
-  Space.fromJson(json) {
-    this.id = json['id'];
-    this.name = json['name'];
-    this.city = json['city'];
-    this.country = json['country'];
-    this.price = json['price'];
-    this.imageUrl = json['image_url'];
-    this.rating = json['rating'];
-    this.address = json['address'];
-    this.phone = json['phone'];
-    this.mapUrl = json['map_url'];
-    this.photos = json['photos'];
-    this.totalKitchens = json['number_of_kitchens'];
-    this.totalBedroom = json['number_of_bedrooms'];
-    this.totalCupBoard = json['number_of_cupboards'];
-  }
+  factory Space.fromJson(json) => Space(
+        id: json['id'],
+        name: json['name'],
+        city: json['city'],
+        country: json['country'],
+        price: json['price'],
+        imageUrl: json['image_url'],
+        rating: json['rating'],
+        address: json['address'],
+        phone: json['phone'],
+        mapUrl: json['map_url'],
+        photos: json['photos'],
+        totalKitchens: json['number_of_kitchens'],
+        totalBedroom: json['number_of_bedrooms'],
+        totalCupBoard: json['number_of_cupboards'],
+      );
 }

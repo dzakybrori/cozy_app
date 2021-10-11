@@ -4,5 +4,10 @@ class City {
   final String imageUrl;
   final bool isFavorite;
 
-  const City({this.id, this.name, this.imageUrl, this.isFavorite = false});
+  const City({
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+    this.isFavorite = false,
+  });
 }

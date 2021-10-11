@@ -5,9 +5,9 @@ class Tips {
   final String updatedAt;
 
   const Tips({
-    this.id,
-    this.title,
-    this.imageUrl,
-    this.updatedAt,
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required this.updatedAt,
   });
 }
