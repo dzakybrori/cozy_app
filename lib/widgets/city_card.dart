@@ -1,5 +1,5 @@
 import 'package:cozy_app/models/city.dart';
-import 'package:cozy_app/theme.dart';
+import 'package:cozy_app/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

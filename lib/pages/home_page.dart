@@ -2,7 +2,7 @@ import 'package:cozy_app/models/city.dart';
 import 'package:cozy_app/models/space.dart';
 import 'package:cozy_app/models/tips.dart';
 import 'package:cozy_app/provider/space_provider.dart';
-import 'package:cozy_app/theme.dart';
+import 'package:cozy_app/shared/theme.dart';
 import 'package:cozy_app/widgets/bottom_navbar_item.dart';
 import 'package:cozy_app/widgets/city_card.dart';
 import 'package:cozy_app/widgets/space_card.dart';

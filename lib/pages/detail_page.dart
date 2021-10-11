@@ -1,6 +1,6 @@
 import 'package:cozy_app/models/space.dart';
 import 'package:cozy_app/pages/error_page.dart';
-import 'package:cozy_app/theme.dart';
+import 'package:cozy_app/shared/theme.dart';
 import 'package:cozy_app/widgets/facility_item.dart';
 import 'package:cozy_app/widgets/rating_item.dart';
 import 'package:flutter/material.dart';
