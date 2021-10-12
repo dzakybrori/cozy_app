@@ -1,6 +1,7 @@
 import 'package:cozy_app/models/city.dart';
 import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../extension/extensions.dart';
 
@@ -62,12 +63,21 @@ class CityCard extends StatelessWidget {
         height: context.dp(30),
         decoration: BoxDecoration(
             color: context.primaryColor,
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(36))),
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100))),
         child: Padding(
-          padding: EdgeInsets.only(left: context.dp(6)),
+          padding: EdgeInsets.only(
+            left: context.dp(17),
+            right: context.dp(11),
+            top: context.dp(2),
+            bottom: context.dp(6),
+          ),
           child: Center(
-              child: Image.asset('assets/images/icon_star.png',
-                  width: context.dp(22), height: context.dp(22))),
+              child: SvgPicture.asset(
+            'assets/svg/icon_star.svg',
+            color: context.secondaryColor,
+            width: context.dp(22),
+            height: context.dp(22),
+          )),
         ),
       ),
     );

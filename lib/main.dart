@@ -111,6 +111,7 @@ class MyApp extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               caption: TextStyle(
+                height: 1.7,
                 fontSize: 13,
                 letterSpacing: 0,
                 color: lightBackgroundColor,
@@ -120,6 +121,7 @@ class MyApp extends StatelessWidget {
               button: TextStyle(
                 fontSize: 16,
                 letterSpacing: 0,
+                height: 1.7,
                 color: primaryColor,
                 fontWeight: FontWeight.w500,
                 overflow: TextOverflow.ellipsis,

@@ -30,10 +30,16 @@ class _HomePageState extends State<HomePage> {
     'Tips & Guidance'
   ];
 
+  late SpaceProvider _spaceProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    _spaceProvider = Provider.of<SpaceProvider>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
-    var spaceProvider = Provider.of<SpaceProvider>(context, listen: false);
-
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -44,6 +50,7 @@ class _HomePageState extends State<HomePage> {
             _buildSubHeader(_subHeader[0]),
             _buildPopularCities(),
             _buildSubHeader(_subHeader[1]),
+            _buildRecommendedSpaces(),
             _buildSubHeader(_subHeader[2]),
           ],
         ),
@@ -95,6 +102,38 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  SliverPadding _buildRecommendedSpaces() => SliverPadding(
+        padding: EdgeInsets.symmetric(horizontal: context.dp(paddingEdge)),
+        sliver: FutureBuilder<List<Space>>(
+          future: _spaceProvider.getRecommendedSpaces(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Space> data = snapshot.data!;
+
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => Padding(
+                    padding:
+                        EdgeInsets.only(top: (index > 0) ? context.dp(30) : 0),
+                    child: SpaceCard(data[index]),
+                  ),
+                  childCount: data.length,
+                ),
+              );
+            } else {
+              return SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 200.h,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              );
+            }
+          },
+        ),
+      );
+
   Container _buildBottomNav(BuildContext context) {
     return Container(
       height: 65.h,
@@ -138,31 +177,6 @@ class _HomePageState extends State<HomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FutureBuilder<List<Space>>(
-          future: spaceProvider.getRecommendedSpaces(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List<Space> data = snapshot.data!;
-
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: data.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(bottom: 30.h),
-                  child: SpaceCard(data[index]),
-                ),
-              );
-            } else {
-              return SizedBox(
-                height: 200.h,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-          },
-        ),
         Text(
           'Tips & Guidance',
           style: regulerTextStyle,
