@@ -1,7 +1,8 @@
-import 'package:cozy_app/models/tips.dart';
-import 'package:cozy_app/shared/theme.dart';
+import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../extension/extensions.dart';
+import '../models/tips.dart';
 
 class TipsCard extends StatelessWidget {
   final Tips tips;
@@ -14,35 +15,21 @@ class TipsCard extends StatelessWidget {
       children: [
         Image.asset(
           tips.imageUrl,
-          width: 80.r,
-          height: 80.r,
+          width: context.dp(80),
+          height: context.dp(80),
         ),
-        SizedBox(width: 16.w),
+        SizedBox(width: context.dp(16)),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              tips.title,
-              style: titleTextStyle.copyWith(
-                fontSize: 18.sp,
-              ),
-            ),
-            SizedBox(height: 4.h),
-            Text(
-              'Updated ${tips.updatedAt}',
-              style: subTitleTextStyle.copyWith(
-                fontSize: 14.sp,
-                color: greySubTextColor,
-              ),
-            )
+            MyText(tips.title, style: context.text.bodyText1),
+            MyText('Updated ${tips.updatedAt}',
+                style: context.text.bodyText2?.copyWith(height: 1.7))
           ],
         ),
         Spacer(),
         IconButton(
-            icon: Icon(
-              Icons.chevron_right,
-              color: Color(0XFFC9C9C9),
-            ),
+            icon: Icon(Icons.chevron_right, color: context.disableColor),
             onPressed: () {}),
       ],
     );

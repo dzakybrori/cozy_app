@@ -11,8 +11,6 @@ Color surfaceColor = Color(0XFFF0F0F0);
 Color greySubTextColor = Color(0XFF7A7E86);
 Color lightGreySubTextColor = Color(0XFF82868E);
 
-double paddingEdge = 24;
-
 MaterialColor primarySwatch = generateMaterialColor(primaryColor);
 MaterialColor secondarySwatch = generateMaterialColor(secondaryColor);
 

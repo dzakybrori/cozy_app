@@ -1,4 +1,3 @@
-import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -7,9 +6,9 @@ import '../extension/extensions.dart';
 import '../models/space.dart';
 import '../provider/space_provider.dart';
 import '../shared/shared_value.dart';
-import '../shared/theme.dart';
 import '../widgets/bottom_navbar_item.dart';
 import '../widgets/city_card.dart';
+import '../widgets/my_text.dart';
 import '../widgets/space_card.dart';
 import '../widgets/tips_card.dart';
 
@@ -52,6 +51,7 @@ class _HomePageState extends State<HomePage> {
             _buildSubHeader(_subHeader[1]),
             _buildRecommendedSpaces(),
             _buildSubHeader(_subHeader[2]),
+            _buildTipsAndGuidance(),
           ],
         ),
       ),
@@ -134,68 +134,53 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
-  Container _buildBottomNav(BuildContext context) {
-    return Container(
-      height: 65.h,
-      width: MediaQuery.of(context).size.width - (2 * paddingEdge.w),
-      margin: EdgeInsets.symmetric(horizontal: paddingEdge.w, vertical: 4.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(23.w),
+  SliverPadding _buildTipsAndGuidance() {
+    return SliverPadding(
+      padding: EdgeInsets.only(
+        left: context.dp(paddingEdge),
+        right: context.dp(paddingEdge),
+        bottom: context.dp(110),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black12.withOpacity(0.06),
-          borderRadius: BorderRadius.circular(23.w),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            BottomNavbarItem(
-              imageUrl: 'assets/images/icon_home.png',
-              isActive: true,
-            ),
-            BottomNavbarItem(
-              imageUrl: 'assets/images/icon_mail.png',
-              isActive: false,
-            ),
-            BottomNavbarItem(
-              imageUrl: 'assets/images/icon_card.png',
-              isActive: false,
-            ),
-            BottomNavbarItem(
-              imageUrl: 'assets/images/icon_love.png',
-              isActive: false,
-            ),
-          ],
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => Padding(
+              padding: EdgeInsets.only(top: (index > 0) ? context.dp(20) : 0),
+              child: TipsCard(mTipsList[index])),
+          childCount: mTipsList.length,
         ),
       ),
     );
   }
 
-  Widget _buildRecomendedSpace(SpaceProvider spaceProvider) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Tips & Guidance',
-          style: regulerTextStyle,
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: mTipsList.length,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.only(
-              top: (index == 0) ? 16.h : 0,
-              bottom: (index == (mTipsList.length - 1)) ? 110.h : 20.h,
-            ),
-            child: TipsCard(mTipsList[index]),
+  Container _buildBottomNav(BuildContext context) {
+    return Container(
+      height: context.dp(65),
+      width: context.dp(327),
+      margin: EdgeInsets.symmetric(
+          horizontal: context.dp(paddingEdge), vertical: context.h(8)),
+      decoration: BoxDecoration(
+          color: context.surface, borderRadius: BorderRadius.circular(23)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          BottomNavbarItem(
+            imageUrl: 'assets/svg/icon_home.svg',
+            isActive: true,
           ),
-        ),
-        // NOTE: End of Recommended Space
-        // NOTE: Bottom NavBar
-      ],
+          BottomNavbarItem(
+            imageUrl: 'assets/svg/icon_mail.svg',
+            isActive: false,
+          ),
+          BottomNavbarItem(
+            imageUrl: 'assets/svg/icon_card.svg',
+            isActive: false,
+          ),
+          BottomNavbarItem(
+            imageUrl: 'assets/svg/icon_love.svg',
+            isActive: false,
+          ),
+        ],
+      ),
     );
   }
 }

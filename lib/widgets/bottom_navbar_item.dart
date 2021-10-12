@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../extension/extensions.dart';
 
 class BottomNavbarItem extends StatelessWidget {
   final String imageUrl;
@@ -12,23 +14,21 @@ class BottomNavbarItem extends StatelessWidget {
     return Column(
       children: [
         Spacer(),
-        Image.asset(
+        SvgPicture.asset(
           imageUrl,
-          width: 26.w,
+          width: context.dp(30),
+          color: isActive ? context.onSurface : context.disableColor,
         ),
         Spacer(),
-        isActive
-            ? Container(
-                width: 30.w,
-                height: 4.r,
-                decoration: BoxDecoration(
-                  color: Color(0XFF7F74EB),
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(1000),
-                  ),
-                ),
-              )
-            : Container(),
+        if (isActive)
+          Container(
+            width: context.dp(30),
+            height: context.dp(4),
+            decoration: BoxDecoration(
+              color: context.onSurface,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(1000)),
+            ),
+          ),
       ],
     );
   }
