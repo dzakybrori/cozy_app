@@ -1,117 +1,88 @@
-import 'package:cozy_app/pages/home_page.dart';
-import 'package:cozy_app/shared/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../extension/extensions.dart';
+import '../shared/shared_value.dart';
+import '../widgets/my_text.dart';
 
 class SplashPage extends StatelessWidget {
+  static const String _title = 'Find Cozy House\nto Stay and Happy';
+  static const String _subTitle =
+      'Stop membuang banyak waktu\npada tempat yang tidak habitable';
+
+  const SplashPage({Key? key}) : super(key: key);
+
+  void _onClickExplore(BuildContext context) =>
+      Navigator.pushNamed(context, RouteName.homePage);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         bottom: false,
         child: Stack(
           children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 289.h,
-                width: double.infinity,
-                color: secondaryColor,
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Image.asset(
-                'assets/images/house.png',
-                height: 433.h,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: 50.h,
-                left: 30.w,
-                right: 30.w,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 50.r,
-                    width: 50.r,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/logo.png',
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(17.w),
-                    ),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.only(top: 15.r, bottom: 15.r, right: 15.r),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Find Cozy House\nto Stay and Happy',
-                            style: titleTextStyle.copyWith(fontSize: 24.sp),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text(
-                            'Stop membuang banyak waktu\npada tempat yang tidak habitable',
-                            style: subTitleTextStyle.copyWith(
-                              fontSize: 16.sp,
-                              color: lightGreySubTextColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 25.h,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Explore Now',
-                      style: btnTextStyle,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 11.r,
-                        horizontal: 50.r,
-                      ),
-                      primary: primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(17.w),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            ..._backgroundImage(context),
+            _bodyContent(context),
           ],
         ),
       ),
     );
   }
+
+  Padding _bodyContent(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: context.h(50),
+        left: context.dp(30),
+        right: context.dp(30),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SvgPicture.asset('assets/svg/logo.svg',
+              width: context.dp(50), fit: BoxFit.fitWidth),
+          _titleSubTitleText(context),
+          ElevatedButton(
+              onPressed: () => _onClickExplore(context),
+              child: MyText('Explore Now')),
+        ],
+      ),
+    );
+  }
+
+  Container _titleSubTitleText(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: context.h(15), bottom: context.h(25)),
+      padding: EdgeInsets.only(
+          top: context.dp(8), bottom: context.dp(8), right: context.dp(8)),
+      decoration: BoxDecoration(
+        color: Colors.white70,
+        borderRadius: BorderRadius.circular(17),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MyText(_title, style: context.text.headline6),
+          SizedBox(height: context.h(10)),
+          MyText(_subTitle, style: context.text.subtitle1),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _backgroundImage(BuildContext context) => [
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: context.h(289),
+            width: double.infinity,
+            color: context.secondaryColor,
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Image.asset('assets/images/house.png', height: context.h(433)),
+        )
+      ];
 }

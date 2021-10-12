@@ -1,58 +1,24 @@
-import 'package:cozy_app/models/city.dart';
-import 'package:cozy_app/models/space.dart';
-import 'package:cozy_app/models/tips.dart';
-import 'package:cozy_app/provider/space_provider.dart';
-import 'package:cozy_app/shared/theme.dart';
-import 'package:cozy_app/widgets/bottom_navbar_item.dart';
-import 'package:cozy_app/widgets/city_card.dart';
-import 'package:cozy_app/widgets/space_card.dart';
-import 'package:cozy_app/widgets/tips_card.dart';
+import 'package:cozy_app/shared/shared_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
-  static const List<Tips> mTipsList = [
-    const Tips(
-        id: 1,
-        title: 'City Guidelines',
-        imageUrl: 'assets/images/icon_tips1.png',
-        updatedAt: '20 Apr'),
-    const Tips(
-        id: 2,
-        title: 'Jakarta Fairship',
-        imageUrl: 'assets/images/icon_tips2.png',
-        updatedAt: '11 Dec')
-  ];
+import '../models/space.dart';
+import '../provider/space_provider.dart';
+import '../shared/theme.dart';
+import '../widgets/bottom_navbar_item.dart';
+import '../widgets/city_card.dart';
+import '../widgets/space_card.dart';
+import '../widgets/tips_card.dart';
 
-  static const List<City> mCityList = [
-    const City(
-        id: 1, name: 'Jakarta', imageUrl: 'assets/images/city1_jakarta.png'),
-    const City(
-        id: 2,
-        name: 'Bandung',
-        imageUrl: 'assets/images/city2_bandung.png',
-        isFavorite: true),
-    const City(
-        id: 3, name: 'Surabaya', imageUrl: 'assets/images/city3_surabaya.png'),
-    const City(
-        id: 4,
-        name: 'Palembang',
-        imageUrl: 'assets/images/city4_palembang.png'),
-    const City(
-        id: 5,
-        name: 'Aceh',
-        imageUrl: 'assets/images/city5_aceh.png',
-        isFavorite: true),
-    const City(id: 6, name: 'Bogor', imageUrl: 'assets/images/city6_bogor.png')
-  ];
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var spaceProvider = Provider.of<SpaceProvider>(context);
+    var spaceProvider = Provider.of<SpaceProvider>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         bottom: false,
         child: ListView(

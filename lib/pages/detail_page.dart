@@ -11,25 +11,24 @@ import 'package:url_launcher/url_launcher.dart';
 class DetailPage extends StatefulWidget {
   final Space space;
 
-  DetailPage(this.space);
+  DetailPage(this.space, {Key? key}) : super(key: key);
 
   @override
   _DetailPageState createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
-  bool isWhished = false;
+  bool isWished = false;
 
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     super.initState();
   }
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(
-        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
   }
 
@@ -38,11 +37,7 @@ class _DetailPageState extends State<DetailPage> {
     void launchURL(String url) async => await canLaunch(url)
         ? await launch(url)
         : Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ErrorPage(),
-            ),
-          );
+            context, MaterialPageRoute(builder: (context) => ErrorPage()));
 
     Future<void> showConfirmation() async {
       return showDialog(
@@ -375,11 +370,11 @@ class _DetailPageState extends State<DetailPage> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      isWhished = !isWhished;
+                      isWished = !isWished;
                     });
                   },
                   child: Image.asset(
-                    isWhished
+                    isWished
                         ? 'assets/images/btn_wishlist_active.png'
                         : 'assets/images/btn_wishlist_inactive.png',
                     width: 46.r,

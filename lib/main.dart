@@ -1,9 +1,13 @@
+import 'package:animations/animations.dart';
+import 'package:cozy_app/pages/error_page.dart';
+import 'package:cozy_app/pages/home_page.dart';
+import 'package:cozy_app/pages/splash_page.dart';
+import 'package:cozy_app/shared/shared_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import './pages/splash_page.dart';
 import './provider/space_provider.dart';
 import './shared/theme.dart';
 
@@ -33,6 +37,12 @@ class MyApp extends StatelessWidget {
             hintColor: Colors.black54,
             disabledColor: Colors.black38,
             primarySwatch: primarySwatch,
+            pageTransitionsTheme: PageTransitionsTheme(builders: {
+              TargetPlatform.iOS: SharedAxisPageTransitionsBuilder(
+                  transitionType: SharedAxisTransitionType.horizontal),
+              TargetPlatform.android: SharedAxisPageTransitionsBuilder(
+                  transitionType: SharedAxisTransitionType.horizontal),
+            }),
             colorScheme: ColorScheme.fromSwatch(
               primarySwatch: primarySwatch,
               accentColor: secondarySwatch,
@@ -117,7 +127,11 @@ class MyApp extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner: false,
-          home: SplashPage(),
+          routes: {
+            RouteName.splashPage: (ctx) => SplashPage(key: Key('splash-page')),
+            RouteName.homePage: (ctx) => HomePage(key: Key('home-page')),
+            RouteName.errorPage: (ctx) => ErrorPage(key: Key('error-page')),
+          },
         ),
       ),
     );

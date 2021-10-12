@@ -1,9 +1,14 @@
-import 'package:cozy_app/pages/home_page.dart';
+import 'package:cozy_app/shared/shared_value.dart';
 import 'package:cozy_app/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ErrorPage extends StatelessWidget {
+  const ErrorPage({Key? key}) : super(key: key);
+
+  void _onClickBackHome(BuildContext context) =>
+      Navigator.popUntil(context, ModalRoute.withName(RouteName.homePage));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,15 +49,7 @@ class ErrorPage extends StatelessWidget {
                 height: 50.h,
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(),
-                    ),
-                    (route) => false,
-                  );
-                },
+                onPressed: () => _onClickBackHome(context),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 42.w,
