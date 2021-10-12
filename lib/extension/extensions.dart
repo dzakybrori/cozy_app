@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 // Mockup design size
-const mockupHeight = 792;
-const mockupWidth = 360;
+const mockupHeight = 812;
+const mockupWidth = 375;
 
 extension ScreenUtil on BuildContext {
   // Device information
@@ -48,18 +48,12 @@ extension ScreenUtil on BuildContext {
   // Widgets theme data
   ElevatedButtonThemeData get elevatedButton =>
       Theme.of(this).elevatedButtonTheme;
-  OutlinedButtonThemeData get outlinedButton =>
-      Theme.of(this).outlinedButtonTheme;
-  TextButtonThemeData get textButton => Theme.of(this).textButtonTheme;
-  InputDecorationTheme get inputDecoration =>
-      Theme.of(this).inputDecorationTheme;
 }
 
 // Hero Tag extension
 extension HeroTag on String {
-  String get categoryImg => 'category-img-$this';
-  String get categoryTitle => 'category-title-$this';
-  String get jobImg => 'job-img-$this';
-  String get jobTitle => 'job-title-$this';
-  String get jobSubTitle => 'job-subtitle-$this';
+  String get spaceImg => 'space-img-$this';
+  String get spaceName => 'space-name-$this';
+  String get spacePrice => 'space-price-$this';
+  String get spaceStars => 'space-stars-$this';
 }
