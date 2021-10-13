@@ -33,7 +33,7 @@ class BottomNavbarItem extends StatelessWidget {
         Spacer(),
         AnimatedScale(
           duration: Duration(milliseconds: 200),
-          scale: (isActive) ? 1 : 0,
+          scale: isActive ? 1 : 0,
           child: Container(
             width: context.dp(30),
             height: context.dp(4),
