@@ -1,6 +1,8 @@
-import 'package:cozy_app/shared/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import './my_text.dart';
+import '../extension/extensions.dart';
 
 class FacilityItem extends StatelessWidget {
   final String name;
@@ -12,34 +14,19 @@ class FacilityItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.asset(
-          imageUrl,
-          width: 38.r,
-          height: 38.r,
-        ),
-        SizedBox(height: 8.h),
-        Text.rich(
-          TextSpan(
-            text: '$total',
-            children: [
-              TextSpan(
-                text: ' $name',
-                style: subTitleTextStyle.copyWith(
-                  color: greySubTextColor,
-                  fontSize: 14.sp,
-                ),
-              ),
-            ],
-            style: titleTextStyle.copyWith(
-              fontSize: 16.sp,
-              color: primaryColor,
-            ),
-          ),
-        ),
-      ],
+    return SizedBox(
+      height: context.dp(60),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SvgPicture.asset(imageUrl,
+              width: context.dp(32), height: context.dp(32)),
+          SizedBox(height: context.dp(8)),
+          Expanded(
+              child: MyRichText(
+                  priceText: '$total', subText: ' $name', fontSize: 14)),
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../extension/extensions.dart';
 
 class RatingItem extends StatelessWidget {
   final int index;
@@ -9,9 +11,9 @@ class RatingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/images/icon_star.png',
-      width: 20.w,
+    return SvgPicture.asset(
+      'assets/svg/icon_star.svg',
+      width: context.dp(20),
       color: (index <= rating) ? Color(0XFFFF9376) : Color(0XFF989BA1),
     );
   }

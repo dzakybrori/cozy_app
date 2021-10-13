@@ -31,3 +31,31 @@ class MyText extends StatelessWidget {
     );
   }
 }
+
+class MyRichText extends StatelessWidget {
+  final String priceText;
+  final String? subText;
+  final double fontSize;
+
+  const MyRichText(
+      {Key? key, required this.priceText, this.fontSize = 16, this.subText})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text.rich(
+      TextSpan(
+          text: priceText,
+          children: [
+            TextSpan(
+                text: subText ?? ' / month',
+                style: context.text.subtitle1?.copyWith(fontSize: fontSize))
+          ],
+          style: context.text.button?.copyWith(fontSize: fontSize)),
+      maxLines: 1,
+      softWrap: true,
+      textScaleFactor: context.ts,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+}

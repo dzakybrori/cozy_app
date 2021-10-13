@@ -1,13 +1,16 @@
-import 'package:cozy_app/models/space.dart';
-import 'package:cozy_app/pages/error_page.dart';
-import 'package:cozy_app/shared/shared_value.dart';
-import 'package:cozy_app/shared/theme.dart';
-import 'package:cozy_app/widgets/facility_item.dart';
-import 'package:cozy_app/widgets/rating_item.dart';
+import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import './error_page.dart';
+import '../extension/extensions.dart';
+import '../models/space.dart';
+import '../shared/shared_value.dart';
+import '../shared/theme.dart';
+import '../widgets/facility_item.dart';
+import '../widgets/rating_item.dart';
 
 class DetailPage extends StatefulWidget {
   final Space space;
@@ -21,9 +24,33 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   bool isWished = false;
 
+  static const List<String> _subTitles = [
+    'Main Facilities',
+    'Photos',
+    'Location'
+  ];
+
+  List<Widget> _facilities() => [
+        FacilityItem(
+          imageUrl: 'assets/svg/icon_bar.svg',
+          name: 'Kitchen',
+          total: widget.space.totalKitchens,
+        ),
+        FacilityItem(
+          imageUrl: 'assets/svg/icon_bed.svg',
+          name: 'Bedroom',
+          total: widget.space.totalBedroom,
+        ),
+        FacilityItem(
+          imageUrl: 'assets/svg/icon_cupboard.svg',
+          name: 'Big Lemari',
+          total: widget.space.totalCupBoard,
+        ),
+      ];
+
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     super.initState();
   }
 
@@ -35,39 +62,6 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    void launchURL(String url) async => await canLaunch(url)
-        ? await launch(url)
-        : Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ErrorPage()));
-
-    Future<void> showConfirmation() async {
-      return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Konfirmasi'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: [
-                  Text('Apakah kamu ingin menghubungi pemilik kos?'),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('Batal'),
-              ),
-              TextButton(
-                onPressed: () => launchURL('tel:${widget.space.phone}'),
-                child: Text('Hubungi'),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -77,6 +71,10 @@ class _DetailPageState extends State<DetailPage> {
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             slivers: [
               _buildSliverAppBar(),
+              // NOTE: HEADER SECTION
+              _buildSpaceHeader(),
+              // NOTE: MAIN FACILITIES
+              _buildContentSection(_subTitles[0], _buildFacilitiesWidget()),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
@@ -99,47 +97,83 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
+  void launchURL(String url) async => await canLaunch(url)
+      ? await launch(url)
+      : Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ErrorPage()));
+
+  Future<void> showConfirmation() async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: MyText('Konfirmasi'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                MyText('Apakah kamu ingin menghubungi pemilik kos?', maxLine: 3)
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: MyText('Batal'),
+            ),
+            TextButton(
+              onPressed: () => launchURL('tel:${widget.space.phone}'),
+              child: MyText('Hubungi'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // NOTE: SMALL WIDGET
+  Row _buildRatingStars() => Row(
+      children: [1, 2, 3, 4, 5]
+          .map((index) => Padding(
+              padding: EdgeInsets.only(left: context.dp(2)),
+              child: RatingItem(index: index, rating: widget.space.rating)))
+          .toList());
+  // NOTE: END OF SMALL WIDGET
+
   SliverAppBar _buildSliverAppBar() {
     return SliverAppBar(
       elevation: 0,
       stretch: true,
       floating: true,
       titleSpacing: 0,
+      leadingWidth: 0,
       forceElevated: false,
-      expandedHeight: 350.h,
+      expandedHeight: context.h(350),
       backgroundColor: Colors.transparent,
       foregroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       shadowColor: Colors.white,
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.pin,
-        stretchModes: const <StretchMode>[
-          StretchMode.zoomBackground,
-        ],
         background: Stack(
           fit: StackFit.expand,
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
           children: [
-            Image.network(
-              widget.space.imageUrl,
-              fit: BoxFit.cover,
-            ),
+            Padding(
+                padding: EdgeInsets.only(bottom: context.dp(4)),
+                child: Image.network(widget.space.imageUrl, fit: BoxFit.cover)),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: 35.h,
+                height: context.dp(30),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.r),
-                    topRight: Radius.circular(40.r),
-                  ),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black38,
-                      spreadRadius: 8.r,
-                      blurRadius: 50.r,
-                      offset: Offset(0, 0), // changes position of shadow
+                      spreadRadius: 8,
+                      blurRadius: 50,
+                      offset: Offset(0, -10),
                     ),
                   ],
                 ),
@@ -151,101 +185,54 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Padding _buildTopContent() {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: paddingEdge.w,
-        right: paddingEdge.w,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+  SliverPadding _buildSpaceHeader() => SliverPadding(
+        padding: EdgeInsets.symmetric(horizontal: context.dp(paddingEdge)),
+        sliver: SliverToBoxAdapter(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.space.name,
-                    style: titleTextStyle.copyWith(
-                      fontSize: 22.sp,
-                    ),
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      text: '\$${widget.space.price}',
+              Expanded(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextSpan(
-                          text: ' / month',
-                          style: subTitleTextStyle.copyWith(
-                            color: greySubTextColor,
-                            fontSize: 16.sp,
-                          ),
-                        ),
-                      ],
-                      style: titleTextStyle.copyWith(
-                        fontSize: 16.sp,
-                        color: primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [1, 2, 3, 4, 5]
-                    .map(
-                      (index) => Container(
-                        margin: EdgeInsets.only(
-                          left: 2.w,
-                        ),
-                        child: RatingItem(
-                          index: index,
-                          rating: widget.space.rating,
-                        ),
-                      ),
-                    )
-                    .toList(),
-              )
+                    MyText(widget.space.name,
+                        style: context.text.headline6?.copyWith(fontSize: 22)),
+                    MyRichText(priceText: '\$${widget.space.price}')
+                  ])),
+              _buildRatingStars(),
             ],
           ),
-          SizedBox(height: 30.h),
-          Text(
-            'Main Facilities',
-            style: regulerTextStyle,
-          ),
-          SizedBox(height: 12.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              FacilityItem(
-                imageUrl: 'assets/images/icon_kitchen.png',
-                name: 'Kitchen',
-                total: widget.space.totalKitchens,
-              ),
-              FacilityItem(
-                imageUrl: 'assets/images/icon_bedroom.png',
-                name: 'Bedroom',
-                total: widget.space.totalBedroom,
-              ),
-              FacilityItem(
-                imageUrl: 'assets/images/icon_cupboard.png',
-                name: 'Big Lemari',
-                total: widget.space.totalCupBoard,
-              ),
-            ],
-          ),
-          SizedBox(height: 30.h),
-          Text(
-            'Photos',
-            style: regulerTextStyle,
-          ),
-          SizedBox(height: 12.h),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 
+  SliverPadding _buildContentSection(String subTitle, Widget content,
+          [double space = 12]) =>
+      SliverPadding(
+        padding: EdgeInsets.only(
+          top: context.dp(30),
+          left: context.dp(paddingEdge),
+          right: context.dp(paddingEdge),
+        ),
+        sliver: SliverToBoxAdapter(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MyText(subTitle, style: context.text.subtitle2),
+              SizedBox(height: context.dp(12)),
+              content
+            ],
+          ),
+        ),
+      );
+
+  // NOTE: MAIN FACILITIES
+  Row _buildFacilitiesWidget() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: _facilities(),
+      );
+  // NOTE: END OF MAIN FACILITIES
+
+  // NOTE: PHOTOS SECTION
   Container _buildPhotoSection() {
     return Container(
       height: 108.r,
@@ -272,6 +259,25 @@ class _DetailPageState extends State<DetailPage> {
             ),
           );
         },
+      ),
+    );
+  }
+  // NOTE: END OF PHOTOS SECTION
+
+  Padding _buildTopContent() {
+    return Padding(
+      padding: EdgeInsets.only(
+          left: context.dp(paddingEdge), right: context.dp(paddingEdge)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 30.h),
+          Text(
+            'Photos',
+            style: regulerTextStyle,
+          ),
+          SizedBox(height: 12.h),
+        ],
       ),
     );
   }
