@@ -1,8 +1,8 @@
-import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 
 import '../extension/extensions.dart';
 import '../shared/shared_value.dart';
+import '../widgets/my_text.dart';
 
 class ErrorPage extends StatelessWidget {
   final String? errorTitle;
@@ -14,7 +14,7 @@ class ErrorPage extends StatelessWidget {
       : super(key: key);
 
   void _onClickBackHome(BuildContext context) =>
-      Navigator.popUntil(context, ModalRoute.withName(RouteName.homePage));
+      Navigator.popUntil(context, ModalRoute.withName(RouteName.mainPage));
 
   String _errorTitle() => errorTitle ?? 'Where are you going?';
 

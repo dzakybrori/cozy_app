@@ -5,7 +5,7 @@ const double paddingEdge = 24;
 
 class RouteName {
   static const splashPage = '/';
-  static const homePage = '/home-page';
+  static const mainPage = '/main-page';
   static const errorPage = '/error-page';
 }
 

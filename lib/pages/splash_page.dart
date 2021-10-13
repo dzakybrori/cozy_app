@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   void _onClickExplore(BuildContext context) =>
-      Navigator.pushNamed(context, RouteName.homePage);
+      Navigator.pushNamed(context, RouteName.mainPage);
 
   @override
   Widget build(BuildContext context) {

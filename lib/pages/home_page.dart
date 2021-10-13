@@ -1,4 +1,3 @@
-import 'package:cozy_app/widgets/subheader_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -7,11 +6,11 @@ import '../extension/extensions.dart';
 import '../models/space.dart';
 import '../provider/space_provider.dart';
 import '../shared/shared_value.dart';
-import '../widgets/bottom_navbar_item.dart';
 import '../widgets/city_card.dart';
 import '../widgets/my_text.dart';
 import '../widgets/space_card.dart';
 import '../widgets/tips_card.dart';
+import '../widgets/subheader_delegate.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,8 +39,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return SafeArea(
         bottom: false,
         child: CustomScrollView(
           physics: BouncingScrollPhysics(),
@@ -55,10 +53,7 @@ class _HomePageState extends State<HomePage> {
             _buildTipsAndGuidance(),
           ],
         ),
-      ),
-      floatingActionButton: _buildBottomNav(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+      );
   }
 
   SliverAppBar _buildHeader() => SliverAppBar(
@@ -160,38 +155,6 @@ class _HomePageState extends State<HomePage> {
               child: TipsCard(mTipsList[index])),
           childCount: mTipsList.length,
         ),
-      ),
-    );
-  }
-
-  Container _buildBottomNav(BuildContext context) {
-    return Container(
-      height: context.dp(65),
-      width: context.dp(327),
-      margin: EdgeInsets.symmetric(
-          horizontal: context.dp(paddingEdge), vertical: context.h(8)),
-      decoration: BoxDecoration(
-          color: context.surface, borderRadius: BorderRadius.circular(23)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          BottomNavbarItem(
-            imageUrl: 'assets/svg/icon_home.svg',
-            isActive: true,
-          ),
-          BottomNavbarItem(
-            imageUrl: 'assets/svg/icon_mail.svg',
-            isActive: false,
-          ),
-          BottomNavbarItem(
-            imageUrl: 'assets/svg/icon_card.svg',
-            isActive: false,
-          ),
-          BottomNavbarItem(
-            imageUrl: 'assets/svg/icon_love.svg',
-            isActive: false,
-          ),
-        ],
       ),
     );
   }

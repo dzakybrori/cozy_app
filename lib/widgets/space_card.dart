@@ -1,7 +1,7 @@
-import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import './my_text.dart';
 import '../extension/extensions.dart';
 import '../models/space.dart';
 import '../pages/detail_page.dart';

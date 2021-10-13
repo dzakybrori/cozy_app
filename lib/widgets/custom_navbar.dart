@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import './bottom_navbar_item.dart';
+import '../extension/extensions.dart';
+import '../shared/shared_value.dart';
 
 class CustomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -12,25 +15,48 @@ class CustomNavBar extends StatelessWidget {
     required this.icons,
     this.onTap,
     this.selectedIndex = 0,
-    this.selectedItemColor = const Color(0xff14145F),
-    this.unSelectedItemColor = const Color(0xff9191E3),
+    required this.selectedItemColor,
+    required this.unSelectedItemColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 59,
-      padding: const EdgeInsets.only(top: 5),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xffA1A1DE), Color(0xffA1A1DE).withOpacity(0)],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: _generateItems(context),
+    return SizedBox(
+      height: context.dp(85),
+      child: Stack(
+        children: [
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: context.dw,
+              height: context.dp(65),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    context.background,
+                    context.background.withOpacity(0.2)
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              height: context.dp(65),
+              margin: EdgeInsets.symmetric(horizontal: context.dp(paddingEdge)),
+              decoration: BoxDecoration(
+                  color: context.surface,
+                  borderRadius: BorderRadius.circular(23)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: _generateItems(context),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -47,17 +73,11 @@ class CustomNavBar extends StatelessWidget {
       BuildContext context, String icon, int index, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
-        height: 50,
-        width: 50,
-        alignment:
-            (selectedIndex == index) ? Alignment.topCenter : Alignment.center,
-        child: SvgPicture.asset(icon,
-            width: 24,
-            color: (selectedIndex == index)
-                ? selectedItemColor
-                : unSelectedItemColor),
+      child: BottomNavbarItem(
+        imageUrl: icon,
+        isActive: selectedIndex == index,
+        selectedItemColor: selectedItemColor,
+        unSelectedItemColor: unSelectedItemColor,
       ),
     );
   }
