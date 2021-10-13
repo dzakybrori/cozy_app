@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../extension/extensions.dart';
@@ -130,7 +129,7 @@ class _HomePageState extends State<HomePage> {
             } else {
               return SliverToBoxAdapter(
                 child: SizedBox(
-                  height: 200.h,
+                  height: context.h(200),
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),

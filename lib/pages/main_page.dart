@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:cozy_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 import './error_page.dart';
@@ -23,13 +24,7 @@ class _MainPageState extends State<MainPage> {
   ];
 
   List<Widget> pages = [
-    // HomePage(key: Key('Main-0')),
-    ErrorPage(
-      key: Key('Main-0'),
-      useButton: false,
-      errorTitle: 'Home Page',
-      errorSubTitle: 'This is home page.',
-    ),
+    HomePage(key: Key('Main-0')),
     ErrorPage(
       key: Key('Main-1'),
       useButton: false,
