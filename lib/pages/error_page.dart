@@ -9,7 +9,8 @@ class ErrorPage extends StatelessWidget {
   final String? errorSubTitle;
   final bool useButton;
 
-  const ErrorPage({Key? key, this.errorTitle, this.errorSubTitle, this.useButton = true})
+  const ErrorPage(
+      {Key? key, this.errorTitle, this.errorSubTitle, this.useButton = true})
       : super(key: key);
 
   void _onClickBackHome(BuildContext context) =>
@@ -43,10 +44,11 @@ class ErrorPage extends StatelessWidget {
               SizedBox(height: context.dp(14)),
               Text(_errorSubTitle(),
                   style: context.text.subtitle1, textAlign: TextAlign.center),
-              if(useButton) SizedBox(height: context.dp(50)),
-              if(useButton) ElevatedButton(
-                  onPressed: () => _onClickBackHome(context),
-                  child: MyText('Back to Home')),
+              if (useButton) SizedBox(height: context.dp(50)),
+              if (useButton)
+                ElevatedButton(
+                    onPressed: () => _onClickBackHome(context),
+                    child: MyText('Back to Home')),
             ],
           ),
         ),
