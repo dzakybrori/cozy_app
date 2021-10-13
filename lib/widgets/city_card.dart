@@ -1,9 +1,9 @@
-import 'package:cozy_app/models/city.dart';
-import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import './my_text.dart';
 import '../extension/extensions.dart';
+import '../models/city.dart';
 
 class CityCard extends StatelessWidget {
   final City city;
@@ -14,24 +14,30 @@ class CityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(18),
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(18),
-        child: Container(
-          height: context.dp(150),
-          width: context.dp(120),
-          color: context.surface,
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  Image.asset(city.imageUrl,
-                      height: context.dp(102), fit: BoxFit.cover),
-                  if (city.isFavorite) _buildFavSign(context),
-                ],
-              ),
-              _buildCityName(context),
-            ],
+      child: Container(
+        height: context.dp(150),
+        width: context.dp(120),
+        color: context.surface,
+        child: Material(
+          color: Colors.transparent,
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: () => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                duration: Duration(milliseconds: 500),
+                content: Text('${city.name} City Clicked'))),
+            enableFeedback: true,
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    Image.asset(city.imageUrl,
+                        height: context.dp(102), fit: BoxFit.cover),
+                    if (city.isFavorite) _buildFavSign(context),
+                  ],
+                ),
+                _buildCityName(context),
+              ],
+            ),
           ),
         ),
       ),
