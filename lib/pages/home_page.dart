@@ -1,3 +1,4 @@
+import 'package:cozy_app/widgets/subheader_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
             _buildHeader(),
             _buildSubHeader(_subHeader[0]),
             _buildPopularCities(),
-            _buildSubHeader(_subHeader[1]),
+            _buildSubHeaderPersistent(),
             _buildRecommendedSpaces(),
             _buildSubHeader(_subHeader[2]),
             _buildTipsAndGuidance(),
@@ -60,10 +61,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  SliverPadding _buildHeader() => SliverPadding(
-        padding:
-            EdgeInsets.only(top: context.dp(30), left: context.dp(paddingEdge)),
-        sliver: SliverToBoxAdapter(
+  SliverAppBar _buildHeader() => SliverAppBar(
+        elevation: 0,
+        titleSpacing: 0,
+        leadingWidth: 0,
+        toolbarHeight: context.dp(86),
+        automaticallyImplyLeading: false,
+        backgroundColor: context.background,
+        title: Padding(
+          padding: EdgeInsets.only(
+              top: context.dp(30), left: context.dp(paddingEdge)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -82,6 +89,11 @@ class _HomePageState extends State<HomePage> {
         ),
         sliver: SliverToBoxAdapter(
             child: MyText(title, maxLine: 1, style: context.text.subtitle2)),
+      );
+
+  SliverPersistentHeader _buildSubHeaderPersistent() => SliverPersistentHeader(
+        pinned: true,
+        delegate: SubHeaderDelegate(subTitle: _subHeader[1]),
       );
 
   SliverToBoxAdapter _buildPopularCities() {
@@ -113,8 +125,8 @@ class _HomePageState extends State<HomePage> {
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => Padding(
-                    padding:
-                        EdgeInsets.only(top: (index > 0) ? context.dp(30) : 0),
+                    padding: EdgeInsets.only(
+                        top: (index > 0) ? context.dp(paddingEdge) : 0),
                     child: SpaceCard(data[index]),
                   ),
                   childCount: data.length,

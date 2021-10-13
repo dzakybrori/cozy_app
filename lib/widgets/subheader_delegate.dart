@@ -1,4 +1,5 @@
 import 'package:cozy_app/shared/shared_value.dart';
+import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 
 import '../extension/extensions.dart';
@@ -12,8 +13,8 @@ class SubHeaderDelegate extends SliverPersistentHeaderDelegate {
   SubHeaderDelegate({
     required this.subTitle,
     this.backgroundColor = Colors.white,
-    this.extendedHeight = 56,
-    this.collapsedHeight = 50,
+    this.extendedHeight = 70,
+    this.collapsedHeight = 60,
   });
 
   @override
@@ -21,21 +22,21 @@ class SubHeaderDelegate extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     // print('SUB HEADER OFFSET: $shrinkOffset');
     return Material(
-      elevation: (shrinkOffset > 6) ? 4 : 0,
+      elevation: (shrinkOffset > 20) ? 4 : 0,
       child: AnimatedContainer(
         color: backgroundColor,
         curve: Curves.easeInOutQuart,
         alignment:
-            (shrinkOffset > 6) ? Alignment.bottomCenter : Alignment.bottomLeft,
+            (shrinkOffset > 20) ? Alignment.bottomCenter : Alignment.bottomLeft,
         duration: Duration(milliseconds: 300),
         padding: EdgeInsets.only(
           left: context.dp(paddingEdge),
           right: context.dp(paddingEdge),
-          bottom: context.dp(8),
+          bottom: context.dp(16),
         ),
-        child: Text(subTitle,
-            style: context.text.subtitle1
-                ?.copyWith(fontSize: (shrinkOffset > 6) ? 18 : 16)),
+        child: MyText(subTitle,
+            style: context.text.subtitle2
+                ?.copyWith(fontSize: (shrinkOffset > 20) ? 18 : 16)),
       ),
     );
   }
