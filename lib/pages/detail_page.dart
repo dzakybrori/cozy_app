@@ -1,14 +1,13 @@
 import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import './error_page.dart';
 import '../extension/extensions.dart';
 import '../models/space.dart';
 import '../shared/shared_value.dart';
-import '../shared/theme.dart';
 import '../widgets/facility_item.dart';
 import '../widgets/rating_item.dart';
 
@@ -75,17 +74,12 @@ class _DetailPageState extends State<DetailPage> {
               _buildSpaceHeader(),
               // NOTE: MAIN FACILITIES
               _buildContentSection(_subTitles[0], _buildFacilitiesWidget()),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    _buildTopContent(),
-                    // NOTE: PHOTOS SECTION
-                    _buildPhotoSection(),
-                    // END OF PHOTOS SECTION
-                    _buildLocationSection(launchURL, context, showConfirmation),
-                  ],
-                ),
-              ),
+              // NOTE: PHOTOS SECTION
+              ..._buildPhotoSection(),
+              // NOTE: LOCATION SECTION
+              _buildContentSection(_subTitles[2], _buildLocationSections()),
+              // NOTE: BOOK BUTTON
+              _buildBookButton(context),
             ],
           ),
           Align(
@@ -101,6 +95,8 @@ class _DetailPageState extends State<DetailPage> {
       ? await launch(url)
       : Navigator.push(
           context, MaterialPageRoute(builder: (context) => ErrorPage()));
+
+  void _onClickFav() => setState(() => isWished = !isWished);
 
   Future<void> showConfirmation() async {
     return showDialog(
@@ -131,60 +127,74 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   // NOTE: SMALL WIDGET
+  Align _buildTopModalRounded() => Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          height: context.dp(30),
+          decoration: BoxDecoration(
+            color: context.background,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                spreadRadius: 8,
+                blurRadius: 50,
+                offset: Offset(0, -10),
+              ),
+            ],
+          ),
+        ),
+      );
+
   Row _buildRatingStars() => Row(
       children: [1, 2, 3, 4, 5]
           .map((index) => Padding(
               padding: EdgeInsets.only(left: context.dp(2)),
               child: RatingItem(index: index, rating: widget.space.rating)))
           .toList());
+
+  SliverPadding _buildBookButton(BuildContext context) => SliverPadding(
+        padding: EdgeInsets.symmetric(
+            vertical: context.dp(30), horizontal: context.dp(paddingEdge)),
+        sliver: SliverToBoxAdapter(
+            child: ElevatedButton(
+                onPressed: showConfirmation, child: MyText('Book Now'))),
+      );
+
   // NOTE: END OF SMALL WIDGET
 
-  SliverAppBar _buildSliverAppBar() {
-    return SliverAppBar(
-      elevation: 0,
-      stretch: true,
-      floating: true,
-      titleSpacing: 0,
-      leadingWidth: 0,
-      forceElevated: false,
-      expandedHeight: context.h(350),
-      backgroundColor: Colors.transparent,
-      foregroundColor: Colors.transparent,
-      automaticallyImplyLeading: false,
-      shadowColor: Colors.white,
-      flexibleSpace: FlexibleSpaceBar(
-        collapseMode: CollapseMode.pin,
-        background: Stack(
-          fit: StackFit.expand,
-          alignment: Alignment.center,
-          children: [
-            Padding(
-                padding: EdgeInsets.only(bottom: context.dp(4)),
-                child: Image.network(widget.space.imageUrl, fit: BoxFit.cover)),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: context.dp(30),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black38,
-                      spreadRadius: 8,
-                      blurRadius: 50,
-                      offset: Offset(0, -10),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+  // NOTE: SLIVER APP BAR
+  SliverAppBar _buildSliverAppBar() => SliverAppBar(
+        elevation: 0,
+        stretch: true,
+        floating: true,
+        titleSpacing: 0,
+        leadingWidth: 0,
+        forceElevated: false,
+        expandedHeight: context.h(350),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        shadowColor: Colors.white,
+        flexibleSpace: FlexibleSpaceBar(
+          collapseMode: CollapseMode.pin,
+          background: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.center,
+            children: [
+              Padding(
+                  padding: EdgeInsets.only(bottom: context.dp(4)),
+                  child:
+                      Image.network(widget.space.imageUrl, fit: BoxFit.cover)),
+              _buildTopModalRounded(),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 
+  // NOTE: END OF SLIVER APP BAR
+
+  // NOTE: SPACE HEADER
   SliverPadding _buildSpaceHeader() => SliverPadding(
         padding: EdgeInsets.symmetric(horizontal: context.dp(paddingEdge)),
         sliver: SliverToBoxAdapter(
@@ -205,6 +215,9 @@ class _DetailPageState extends State<DetailPage> {
         ),
       );
 
+  // NOTE: END OF SPACE HEADER
+
+  // NOTE: TEMPLATE SECTION
   SliverPadding _buildContentSection(String subTitle, Widget content,
           [double space = 12]) =>
       SliverPadding(
@@ -218,174 +231,134 @@ class _DetailPageState extends State<DetailPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MyText(subTitle, style: context.text.subtitle2),
-              SizedBox(height: context.dp(12)),
+              SizedBox(height: context.dp(space)),
               content
             ],
           ),
         ),
       );
 
+  // NOTE: END OF TEMPLATE SECTION
+
   // NOTE: MAIN FACILITIES
   Row _buildFacilitiesWidget() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: _facilities(),
       );
+
   // NOTE: END OF MAIN FACILITIES
 
   // NOTE: PHOTOS SECTION
-  Container _buildPhotoSection() {
-    return Container(
-      height: 108.r,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.space.photos.length,
-        physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(
-              left: (index == 0) ? paddingEdge.w : 0,
-              right: (index == (widget.space.photos.length - 1))
-                  ? paddingEdge.w
-                  : 18.w,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16.w),
-              child: Image.network(
-                widget.space.photos[index],
-                width: 135.r,
-                height: 108.r,
-                fit: BoxFit.cover,
+  List<Widget> _buildPhotoSection() => [_buildPhotosHeader(), _buildPhotos()];
+
+  SliverPadding _buildPhotosHeader() => SliverPadding(
+        padding: EdgeInsets.only(
+          top: context.dp(30),
+          left: context.dp(paddingEdge),
+          right: context.dp(paddingEdge),
+          bottom: context.dp(12),
+        ),
+        sliver: SliverToBoxAdapter(
+            child: MyText(_subTitles[1], style: context.text.subtitle2)),
+      );
+
+  SliverToBoxAdapter _buildPhotos() {
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: context.dp(88),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          physics: BouncingScrollPhysics(),
+          itemCount: widget.space.photos.length,
+          padding: EdgeInsets.symmetric(horizontal: context.dp(paddingEdge)),
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.only(left: (index > 0) ? context.dp(18) : 0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.network(
+                  widget.space.photos[index],
+                  width: context.dp(110),
+                  height: context.dp(88),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
+
   // NOTE: END OF PHOTOS SECTION
 
-  Padding _buildTopContent() {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: context.dp(paddingEdge), right: context.dp(paddingEdge)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  // NOTE: LOCATION SECTION
+  Row _buildLocationSections() => Row(
         children: [
-          SizedBox(height: 30.h),
-          Text(
-            'Photos',
-            style: regulerTextStyle,
+          Expanded(
+            child: MyText('${widget.space.address}\n${widget.space.city}',
+                style: context.text.bodyText2
+                    ?.copyWith(fontWeight: FontWeight.normal)),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(width: context.dp(30)),
+          InkWell(
+            onTap: () => launchURL(widget.space.mapUrl),
+            borderRadius: BorderRadius.circular(300),
+            child: Container(
+              width: context.dp(40),
+              height: context.dp(40),
+              padding: EdgeInsets.all(context.dp(9)),
+              decoration:
+                  BoxDecoration(color: context.surface, shape: BoxShape.circle),
+              child: SvgPicture.asset('assets/svg/icon_location.svg',
+                  color: context.disableColor),
+            ),
+          ),
         ],
-      ),
-    );
-  }
+      );
 
-  Padding _buildLocationSection(void launchURL(String url),
-      BuildContext context, Future<void> showConfirmation()) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: 40.h,
-        left: paddingEdge.w,
-        right: paddingEdge.w,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 30.h),
-          Text(
-            'Location',
-            style: regulerTextStyle,
-          ),
-          SizedBox(height: 6.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                '${widget.space.address}\n${widget.space.city}',
-                style: regulerTextStyle.copyWith(
-                  fontSize: 15.sp,
-                  color: greySubTextColor,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  launchURL(widget.space.mapUrl);
-                  //https://goo.gl/maps/c9DNdN65Tr5gMu4KA
-                },
-                child: Image.asset(
-                  'assets/images/btn_map.png',
-                  width: 40.w,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 40.h),
-          _buildBookButton(context, showConfirmation),
-        ],
-      ),
-    );
-  }
+  // NOTE: END OF LOCATION SECTION
 
-  Container _buildBookButton(
-      BuildContext context, Future<void> showConfirmation()) {
-    return Container(
-      height: 50,
-      width: MediaQuery.of(context).size.width,
-      child: ElevatedButton(
-        onPressed: () {
-          showConfirmation();
-        },
-        child: Text(
-          'Book Now',
-          style: btnTextStyle,
-        ),
-        style: ElevatedButton.styleFrom(
-          primary: primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(17.w),
-          ),
-        ),
-      ),
-    );
-  }
-
+  // NOTE: ACTION BAR
   Container _buildActionBar(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: paddingEdge.w,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: context.dp(paddingEdge)),
       child: Column(
         children: [
-          SizedBox(height: 30.h),
+          SizedBox(height: context.h(30)),
           Align(
             alignment: Alignment.topCenter,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset(
-                    'assets/images/btn_back.png',
-                    width: 46.r,
-                    height: 46.r,
+                Container(
+                  width: context.dp(40),
+                  height: context.dp(40),
+                  decoration: BoxDecoration(
+                      color: context.background, shape: BoxShape.circle),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_rounded),
+                    iconSize: context.dp(16),
+                    color: context.primaryVariant,
+                    padding: EdgeInsets.only(right: context.dp(2)),
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      isWished = !isWished;
-                    });
-                  },
-                  child: Image.asset(
-                    isWished
-                        ? 'assets/images/btn_wishlist_active.png'
-                        : 'assets/images/btn_wishlist_inactive.png',
-                    width: 46.r,
-                    height: 46.r,
+                Container(
+                  width: context.dp(40),
+                  height: context.dp(40),
+                  decoration: BoxDecoration(
+                      color: context.background, shape: BoxShape.circle),
+                  child: IconButton(
+                    icon: Icon(isWished
+                        ? Icons.favorite_rounded
+                        : Icons.favorite_border_rounded),
+                    iconSize: context.dp(18),
+                    color: isWished
+                        ? context.secondaryColor
+                        : context.primaryVariant,
+                    padding: EdgeInsets.all(context.dp(10)),
+                    onPressed: _onClickFav,
                   ),
                 ),
               ],
@@ -395,4 +368,5 @@ class _DetailPageState extends State<DetailPage> {
       ),
     );
   }
+// NOTE: END OF ACTION BAR
 }

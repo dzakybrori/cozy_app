@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
               backgroundColor: lightBackgroundColor,
             ).copyWith(
               primary: primarySwatch,
+              primaryVariant: primarySwatch.shade800,
               secondary: secondarySwatch,
               surface: surfaceColor,
               onSurface: primarySwatch.shade400,
