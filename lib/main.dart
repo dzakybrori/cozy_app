@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import './provider/space_provider.dart';
-import './shared/theme.dart';
-import './shared/shared_value.dart';
 import './pages/error_page.dart';
 import './pages/main_page.dart';
 import './pages/splash_page.dart';
+import './provider/space_provider.dart';
+import './shared/shared_value.dart';
+import './shared/theme.dart';
 
 void main() {
   runApp(MyApp());

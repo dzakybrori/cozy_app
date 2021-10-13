@@ -9,8 +9,8 @@ import '../shared/shared_value.dart';
 import '../widgets/city_card.dart';
 import '../widgets/my_text.dart';
 import '../widgets/space_card.dart';
-import '../widgets/tips_card.dart';
 import '../widgets/subheader_delegate.dart';
+import '../widgets/tips_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,20 +40,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        bottom: false,
-        child: CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          slivers: [
-            _buildHeader(),
-            _buildSubHeader(_subHeader[0]),
-            _buildPopularCities(),
-            _buildSubHeaderPersistent(),
-            _buildRecommendedSpaces(),
-            _buildSubHeader(_subHeader[2]),
-            _buildTipsAndGuidance(),
-          ],
-        ),
-      );
+      bottom: false,
+      child: CustomScrollView(
+        physics: BouncingScrollPhysics(),
+        slivers: [
+          _buildHeader(),
+          _buildSubHeader(_subHeader[0]),
+          _buildPopularCities(),
+          _buildSubHeaderPersistent(),
+          _buildRecommendedSpaces(),
+          _buildSubHeader(_subHeader[2]),
+          _buildTipsAndGuidance(),
+        ],
+      ),
+    );
   }
 
   SliverAppBar _buildHeader() => SliverAppBar(
