@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../extension/extensions.dart';
-import '../models/space.dart';
 import '../provider/space_provider.dart';
 import '../shared/shared_value.dart';
 import '../widgets/city_card.dart';
@@ -29,19 +28,43 @@ class _HomePageState extends State<HomePage> {
     'Tips & Guidance'
   ];
 
+  // Scroll controller for pull request
+  final _scrollController = ScrollController();
+
   late SpaceProvider _spaceProvider;
 
   @override
   void initState() {
+    _scrollController.addListener(_scrollListener);
     super.initState();
     _spaceProvider = Provider.of<SpaceProvider>(context, listen: false);
   }
 
   @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    } else {
+      fn();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (_spaceProvider.items.isEmpty && this.mounted) {
+      _spaceProvider.getRecommendedSpaces();
+    }
     return SafeArea(
       bottom: false,
       child: CustomScrollView(
+        controller: _scrollController,
         physics: BouncingScrollPhysics(),
         slivers: [
           _buildHeader(),
@@ -54,6 +77,13 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset < -120) {
+      print('Refresh Called');
+      _spaceProvider.refresh();
+    }
   }
 
   SliverAppBar _buildHeader() => SliverAppBar(
@@ -111,26 +141,28 @@ class _HomePageState extends State<HomePage> {
 
   SliverPadding _buildRecommendedSpaces() => SliverPadding(
         padding: EdgeInsets.symmetric(horizontal: context.dp(paddingEdge)),
-        sliver: FutureBuilder<List<Space>>(
-          future: _spaceProvider.getRecommendedSpaces(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List<Space> data = snapshot.data!;
-
+        sliver: Consumer<SpaceProvider>(
+          builder: (context, value, child) {
+            if (value.isLoading) {
+              return child ?? _buildShimmerLoading();
+            } else if (value.items.length > 0) {
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => Padding(
                     padding: EdgeInsets.only(
                         top: (index > 0) ? context.dp(paddingEdge) : 0),
-                    child: SpaceCard(data[index]),
+                    child: SpaceCard(value.items[index]),
                   ),
-                  childCount: data.length,
+                  childCount: value.items.length,
                 ),
               );
             } else {
-              return _buildShimmerLoading();
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Center(child: MyText('Couln\'t load the page'))));
+              return child ?? _buildShimmerLoading();
             }
           },
+          child: _buildShimmerLoading(),
         ),
       );
 

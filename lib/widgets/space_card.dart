@@ -1,3 +1,4 @@
+import 'package:cozy_app/widgets/hero_widget.dart';
 import 'package:cozy_app/widgets/my_image_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,28 +31,37 @@ class SpaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onTapFade(context),
-      borderRadius: BorderRadius.circular(18),
-      child: Row(
-        children: [
-          _buildSpaceImage(context),
-          SizedBox(width: context.dp(20)),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MyText(space.name, style: context.text.bodyText1),
-                _buildPriceText(context),
-                SizedBox(height: context.dp(16)),
-                MyText('${space.city}, ${space.country}',
-                    style: context.text.bodyText2),
-              ],
+    return Stack(
+      children: [
+        Row(
+          children: [
+            _buildSpaceImage(context),
+            SizedBox(width: context.dp(20)),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyText(space.name, style: context.text.bodyText1),
+                  _buildPriceText(context),
+                  SizedBox(height: context.dp(16)),
+                  MyText('${space.city}, ${space.country}',
+                      style: context.text.bodyText2),
+                ],
+              ),
             ),
+          ],
+        ),
+        Positioned.fill(
+          child: Material(
+            type: MaterialType.transparency,
+            color: Colors.transparent,
+            child: InkWell(
+                onTap: () => onTapFade(context),
+                borderRadius: BorderRadius.circular(18)),
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 
@@ -73,10 +83,13 @@ class SpaceCard extends StatelessWidget {
         height: context.dp(110),
         child: Stack(
           children: [
-            MyImageNetwork(
-              space.imageUrl,
-              width: context.dp(130),
-              height: context.dp(110),
+            HeroWidget(
+              tag: space.id.spaceImg,
+              child: MyImageNetwork(
+                space.imageUrl,
+                width: context.dp(130),
+                height: context.dp(110),
+              ),
             ),
             _buildSpaceRating(context)
           ],

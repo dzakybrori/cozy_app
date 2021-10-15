@@ -51,7 +51,7 @@ extension ScreenUtil on BuildContext {
 }
 
 // Hero Tag extension
-extension HeroTag on String {
+extension HeroTag on int {
   String get spaceImg => 'space-img-$this';
   String get spaceName => 'space-name-$this';
   String get spacePrice => 'space-price-$this';
