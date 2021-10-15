@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../extension/extensions.dart';
+
 class ShimmerWidget extends StatelessWidget {
   final double width;
   final double height;
@@ -36,13 +38,13 @@ class ShimmerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade300,
-      highlightColor: Colors.grey.shade100,
+      baseColor: context.disableColor.withOpacity(0.28),
+      highlightColor: context.disableColor.withOpacity(0.1),
       child: Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: Colors.grey.shade300,
+          color: context.disableColor.withOpacity(0.28),
           shape: shape,
           borderRadius: borderRadius,
         ),

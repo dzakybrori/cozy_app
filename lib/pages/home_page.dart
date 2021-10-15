@@ -7,6 +7,7 @@ import '../provider/space_provider.dart';
 import '../shared/shared_value.dart';
 import '../widgets/city_card.dart';
 import '../widgets/my_text.dart';
+import '../widgets/shimmer_widget.dart';
 import '../widgets/space_card.dart';
 import '../widgets/subheader_delegate.dart';
 import '../widgets/tips_card.dart';
@@ -127,16 +128,39 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             } else {
-              return SliverToBoxAdapter(
-                child: SizedBox(
-                  height: context.h(200),
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              );
+              return _buildShimmerLoading();
             }
           },
+        ),
+      );
+
+  SliverList _buildShimmerLoading() => SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => Padding(
+            padding:
+                EdgeInsets.only(top: (index > 0) ? context.dp(paddingEdge) : 0),
+            child: Row(children: [
+              ShimmerWidget.rounded(
+                  width: context.dp(130),
+                  height: context.dp(110),
+                  borderRadius: BorderRadius.circular(18)),
+              SizedBox(width: context.dp(20)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ShimmerWidget.rectangle(
+                      width: context.dp(160), height: context.dp(27)),
+                  SizedBox(height: context.dp(2)),
+                  ShimmerWidget.rectangle(
+                      width: context.dp(105), height: context.dp(24)),
+                  SizedBox(height: context.dp(16)),
+                  ShimmerWidget.rectangle(
+                      width: context.dp(144), height: context.dp(21)),
+                ],
+              ),
+            ]),
+          ),
+          childCount: 4,
         ),
       );
 

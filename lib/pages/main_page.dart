@@ -55,17 +55,14 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _body() {
-    return SafeArea(
-      bottom: false,
-      child: PageTransitionSwitcher(
-        duration: Duration(milliseconds: 500),
-        transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
-            FadeThroughTransition(
-                animation: primaryAnimation,
-                secondaryAnimation: secondaryAnimation,
-                child: child),
-        child: pages[_selectedIndex],
-      ),
+    return PageTransitionSwitcher(
+      duration: Duration(milliseconds: 500),
+      transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
+          FadeThroughTransition(
+              animation: primaryAnimation,
+              secondaryAnimation: secondaryAnimation,
+              child: child),
+      child: pages[_selectedIndex],
     );
   }
 

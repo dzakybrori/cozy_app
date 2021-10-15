@@ -1,3 +1,4 @@
+import 'package:cozy_app/widgets/my_image_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -72,9 +73,8 @@ class SpaceCard extends StatelessWidget {
         height: context.dp(110),
         child: Stack(
           children: [
-            Image.network(
+            MyImageNetwork(
               space.imageUrl,
-              fit: BoxFit.cover,
               width: context.dp(130),
               height: context.dp(110),
             ),

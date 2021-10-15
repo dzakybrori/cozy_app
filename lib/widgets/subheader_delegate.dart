@@ -6,13 +6,11 @@ import '../extension/extensions.dart';
 
 class SubHeaderDelegate extends SliverPersistentHeaderDelegate {
   final String subTitle;
-  final Color backgroundColor;
   final double extendedHeight;
   final double collapsedHeight;
 
   SubHeaderDelegate({
     required this.subTitle,
-    this.backgroundColor = Colors.white,
     this.extendedHeight = 70,
     this.collapsedHeight = 60,
   });
@@ -24,7 +22,7 @@ class SubHeaderDelegate extends SliverPersistentHeaderDelegate {
     return Material(
       elevation: (shrinkOffset > 20) ? 4 : 0,
       child: AnimatedContainer(
-        color: backgroundColor,
+        color: context.background,
         curve: Curves.easeInOutQuart,
         alignment:
             (shrinkOffset > 20) ? Alignment.bottomCenter : Alignment.bottomLeft,

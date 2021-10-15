@@ -1,4 +1,3 @@
-import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +8,8 @@ import '../extension/extensions.dart';
 import '../models/space.dart';
 import '../shared/shared_value.dart';
 import '../widgets/facility_item.dart';
+import '../widgets/my_image_network.dart';
+import '../widgets/my_text.dart';
 import '../widgets/rating_item.dart';
 
 class DetailPage extends StatefulWidget {
@@ -184,8 +185,7 @@ class _DetailPageState extends State<DetailPage> {
             children: [
               Padding(
                   padding: EdgeInsets.only(bottom: context.dp(4)),
-                  child:
-                      Image.network(widget.space.imageUrl, fit: BoxFit.cover)),
+                  child: MyImageNetwork(widget.space.imageUrl)),
               _buildTopModalRounded(),
             ],
           ),
@@ -276,11 +276,10 @@ class _DetailPageState extends State<DetailPage> {
               padding: EdgeInsets.only(left: (index > 0) ? context.dp(18) : 0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.network(
+                child: MyImageNetwork(
                   widget.space.photos[index],
                   width: context.dp(110),
                   height: context.dp(88),
-                  fit: BoxFit.cover,
                 ),
               ),
             );
