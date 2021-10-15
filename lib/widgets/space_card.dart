@@ -1,8 +1,8 @@
-import 'package:cozy_app/widgets/hero_widget.dart';
-import 'package:cozy_app/widgets/my_image_network.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import './my_image_network.dart';
 import './my_text.dart';
 import '../extension/extensions.dart';
 import '../models/space.dart';
@@ -13,59 +13,65 @@ class SpaceCard extends StatelessWidget {
 
   SpaceCard(this.space);
 
-  void onTapFade(BuildContext context) => Navigator.push(
-        context,
-        PageRouteBuilder(
-            transitionDuration: Duration(seconds: 1),
-            reverseTransitionDuration: Duration(seconds: 1),
-            pageBuilder: (context, animation, secondaryAnimation) {
-              final curvedAnimation = CurvedAnimation(
-                  parent: animation, curve: Curves.easeInOutCubic);
-
-              return FadeTransition(
-                opacity: curvedAnimation,
-                child: DetailPage(space),
-              );
-            }),
-      );
+  // void onTapFade(BuildContext context) => Navigator.push(
+  //       context,
+  //       PageRouteBuilder(
+  //           transitionDuration: Duration(seconds: 1),
+  //           reverseTransitionDuration: Duration(seconds: 1),
+  //           pageBuilder: (context, animation, secondaryAnimation) {
+  //             final curvedAnimation = CurvedAnimation(
+  //                 parent: animation, curve: Curves.easeInOutCubic);
+  //
+  //             return FadeTransition(
+  //               opacity: curvedAnimation,
+  //               child: DetailPage(space),
+  //             );
+  //           }),
+  //     );
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Row(
-          children: [
-            _buildSpaceImage(context),
-            SizedBox(width: context.dp(20)),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText(space.name, style: context.text.bodyText1),
-                  _buildPriceText(context),
-                  SizedBox(height: context.dp(16)),
-                  MyText('${space.city}, ${space.country}',
-                      style: context.text.bodyText2),
-                ],
+    return OpenContainer(
+      closedElevation: 0,
+      transitionDuration: Duration(seconds: 1),
+      closedShape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      openBuilder: (context, action) => DetailPage(space),
+      closedBuilder: (context, action) => Stack(
+        children: [
+          Row(
+            children: [
+              _buildSpaceImage(context),
+              SizedBox(width: context.dp(20)),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MyText(space.name, style: context.text.bodyText1),
+                    _buildPriceText(context),
+                    SizedBox(height: context.dp(16)),
+                    MyText('${space.city}, ${space.country}',
+                        style: context.text.bodyText2),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-        Positioned.fill(
-          child: Material(
-            type: MaterialType.transparency,
-            color: Colors.transparent,
-            child: InkWell(
-                onTap: () => onTapFade(context),
-                borderRadius: BorderRadius.circular(18)),
+            ],
           ),
-        )
-      ],
+          Positioned.fill(
+            child: Material(
+              type: MaterialType.transparency,
+              color: Colors.transparent,
+              child: InkWell(
+                  onTap: action, borderRadius: BorderRadius.circular(18)),
+            ),
+          )
+        ],
+      ),
     );
   }
 
-  Text _buildPriceText(BuildContext context) {
+  Widget _buildPriceText(BuildContext context) {
     return Text.rich(
       TextSpan(
           text: '\$${space.price}',
@@ -83,13 +89,10 @@ class SpaceCard extends StatelessWidget {
         height: context.dp(110),
         child: Stack(
           children: [
-            HeroWidget(
-              tag: space.id.spaceImg,
-              child: MyImageNetwork(
-                space.imageUrl,
-                width: context.dp(130),
-                height: context.dp(110),
-              ),
+            MyImageNetwork(
+              space.imageUrl,
+              width: context.dp(130),
+              height: context.dp(110),
             ),
             _buildSpaceRating(context)
           ],
