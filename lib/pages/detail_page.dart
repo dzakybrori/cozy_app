@@ -1,3 +1,4 @@
+import 'package:cozy_app/widgets/hero_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -147,7 +148,7 @@ class _DetailPageState extends State<DetailPage> {
         ),
       );
 
-  Row _buildRatingStars() => Row(
+  Widget _buildRatingStars() => Row(
       children: [1, 2, 3, 4, 5]
           .map((index) => Padding(
               padding: EdgeInsets.only(left: context.dp(2)),
@@ -185,7 +186,9 @@ class _DetailPageState extends State<DetailPage> {
             children: [
               Padding(
                   padding: EdgeInsets.only(bottom: context.dp(4)),
-                  child: MyImageNetwork(widget.space.imageUrl)),
+                  child: HeroWidget(
+                      tag: widget.space.id.spaceImg,
+                      child: MyImageNetwork(widget.space.imageUrl))),
               _buildTopModalRounded(),
             ],
           ),
@@ -205,9 +208,15 @@ class _DetailPageState extends State<DetailPage> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                    MyText(widget.space.name,
-                        style: context.text.headline6?.copyWith(fontSize: 22)),
-                    MyRichText(priceText: '\$${widget.space.price}')
+                    HeroWidget(
+                      tag: widget.space.id.spaceName,
+                      child: MyText(widget.space.name,
+                          style:
+                              context.text.headline6?.copyWith(fontSize: 22)),
+                    ),
+                    HeroWidget(
+                        tag: widget.space.id.spacePrice,
+                        child: MyRichText(priceText: '\$${widget.space.price}'))
                   ])),
               _buildRatingStars(),
             ],
