@@ -48,4 +48,20 @@ class SpaceProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Space findById(int spaceId) =>
+      _items.firstWhere((element) => element.id == spaceId);
+
+  bool favToggle(int spaceId) {
+    // Looking space in _items
+    int index = _items.indexWhere((element) => element.id == spaceId);
+    if (index > -1) {
+      _items[index].isFavorite = !_items[index].isFavorite;
+      notifyListeners();
+      return _items[index].isFavorite;
+    } else {
+      print('TOGGLE FAVORITE: ID SPACE IS NOT FOUND');
+      return false;
+    }
+  }
 }

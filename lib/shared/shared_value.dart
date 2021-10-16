@@ -13,12 +13,12 @@ const List<Tips> mTipsList = [
   const Tips(
       id: 1,
       title: 'City Guidelines',
-      imageUrl: 'assets/images/icon_tips1.png',
+      imageUrl: 'assets/svg/icon_cg.svg',
       updatedAt: '20 Apr'),
   const Tips(
       id: 2,
       title: 'Jakarta Fairship',
-      imageUrl: 'assets/images/icon_tips2.png',
+      imageUrl: 'assets/svg/icon_jf.svg',
       updatedAt: '11 Dec')
 ];
 

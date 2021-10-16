@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import './my_text.dart';
 import '../extension/extensions.dart';
@@ -13,7 +14,7 @@ class TipsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(
+        SvgPicture.asset(
           tips.imageUrl,
           width: context.dp(80),
           height: context.dp(80),

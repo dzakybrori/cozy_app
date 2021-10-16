@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import './error_page.dart';
 import '../extension/extensions.dart';
 import '../models/space.dart';
+import '../provider/space_provider.dart';
 import '../shared/shared_value.dart';
 import '../widgets/facility_item.dart';
 import '../widgets/hero_widget.dart';
@@ -23,7 +25,8 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  bool isWished = false;
+  late bool _isWished = widget.space.isFavorite;
+  double _heartOpacity = 0.0;
 
   static const List<String> _subTitles = [
     'Main Facilities',
@@ -44,14 +47,17 @@ class _DetailPageState extends State<DetailPage> {
         ),
         FacilityItem(
           imageUrl: 'assets/svg/icon_cupboard.svg',
-          name: 'Big Lemari',
+          name: 'Cupboard',
           total: widget.space.totalCupBoard,
         ),
       ];
 
+  late SpaceProvider _spaceProvider;
+
   @override
   void initState() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    _spaceProvider = Provider.of<SpaceProvider>(context, listen: false);
     super.initState();
   }
 
@@ -98,7 +104,12 @@ class _DetailPageState extends State<DetailPage> {
       : Navigator.push(
           context, MaterialPageRoute(builder: (context) => ErrorPage()));
 
-  void _onClickFav() => setState(() => isWished = !isWished);
+  void _onClickFav() => setState(() {
+        if (!_isWished) {
+          _heartOpacity = 1.0;
+        }
+        _isWished = _spaceProvider.favToggle(widget.space.id);
+      });
 
   Future<void> showConfirmation() async {
     return showDialog(
@@ -186,10 +197,28 @@ class _DetailPageState extends State<DetailPage> {
             children: [
               Padding(
                   padding: EdgeInsets.only(bottom: context.dp(4)),
-                  child: HeroWidget(
-                      tag: widget.space.id.spaceImg,
-                      child: MyImageNetwork(widget.space.imageUrl))),
+                  child: GestureDetector(
+                    onDoubleTap: _onClickFav,
+                    child: HeroWidget(
+                        tag: widget.space.id.spaceImg,
+                        child: MyImageNetwork(widget.space.imageUrl)),
+                  )),
               _buildTopModalRounded(),
+              AnimatedScale(
+                duration: Duration(seconds: 1),
+                scale: _isWished ? 1 : 0,
+                curve: Curves.elasticOut,
+                onEnd: () => setState(() => _heartOpacity = 0.0),
+                child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 200),
+                  opacity: _heartOpacity,
+                  child: Icon(
+                    Icons.favorite_rounded,
+                    color: Colors.white60,
+                    size: context.dp(100),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -358,11 +387,11 @@ class _DetailPageState extends State<DetailPage> {
                   decoration: BoxDecoration(
                       color: context.background, shape: BoxShape.circle),
                   child: IconButton(
-                    icon: Icon(isWished
+                    icon: Icon(_isWished
                         ? Icons.favorite_rounded
                         : Icons.favorite_border_rounded),
                     iconSize: context.dp(18),
-                    color: isWished
+                    color: _isWished
                         ? context.secondaryColor
                         : context.primaryVariant,
                     padding: EdgeInsets.all(context.dp(10)),
