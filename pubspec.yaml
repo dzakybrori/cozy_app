@@ -1,5 +1,5 @@
 name: cozy_app
-description: A new Flutter project.
+description: Space finder apps.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -29,7 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.3
 
   # For load SVG file
-  flutter_svg: ^0.22.0
+  flutter_svg: ^0.23.0+1
 
   # For launching url
   url_launcher: ^6.0.12
@@ -55,6 +55,8 @@ dev_dependencies:
 flutter_native_splash:
   color: "#FF9376"
   image: assets/images/icon_logo.png
+  color_dark: "#1E1E1E"
+  image_dark: assets/images/dark_logo.png
 
 flutter_icons:
   android: "launcher_icon"

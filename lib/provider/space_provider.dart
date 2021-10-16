@@ -1,9 +1,10 @@
 import 'dart:collection';
 import 'dart:convert';
 
-import 'package:cozy_app/models/space.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../models/space.dart';
 
 class SpaceProvider with ChangeNotifier {
   List<Space> _items = [];

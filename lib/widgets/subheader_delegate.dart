@@ -1,8 +1,8 @@
-import 'package:cozy_app/shared/shared_value.dart';
-import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 
+import './my_text.dart';
 import '../extension/extensions.dart';
+import '../shared/shared_value.dart';
 
 class SubHeaderDelegate extends SliverPersistentHeaderDelegate {
   final String subTitle;

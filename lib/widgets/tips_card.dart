@@ -1,6 +1,6 @@
-import 'package:cozy_app/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 
+import './my_text.dart';
 import '../extension/extensions.dart';
 import '../models/tips.dart';
 

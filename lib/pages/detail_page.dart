@@ -1,4 +1,3 @@
-import 'package:cozy_app/widgets/hero_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +8,7 @@ import '../extension/extensions.dart';
 import '../models/space.dart';
 import '../shared/shared_value.dart';
 import '../widgets/facility_item.dart';
+import '../widgets/hero_widget.dart';
 import '../widgets/my_image_network.dart';
 import '../widgets/my_text.dart';
 import '../widgets/rating_item.dart';
