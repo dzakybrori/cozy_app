@@ -137,7 +137,7 @@ ThemeData myDarkTheme = ThemeData(
     onSurface: primarySwatch.shade400,
     onPrimary: lightBackgroundColor,
     onError: lightBackgroundColor,
-    onBackground: Colors.black87,
+    onBackground: Colors.white.withOpacity(0.87),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(

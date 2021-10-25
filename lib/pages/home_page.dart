@@ -61,10 +61,10 @@ class _HomePageState extends State<HomePage> {
     if (_spaceProvider.items.isEmpty && this.mounted) {
       _spaceProvider.getRecommendedSpaces();
     }
-    return SafeArea(
-      bottom: false,
-      child: Scaffold(
-        body: CustomScrollView(
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        child: CustomScrollView(
           controller: _scrollController,
           physics: BouncingScrollPhysics(),
           slivers: [

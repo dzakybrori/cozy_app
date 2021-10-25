@@ -16,11 +16,11 @@ class FavoritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<SpaceProvider>(
-        builder: (context, value, child) {
-          if (value.items.length > 0) {
-            return Padding(
+    return Consumer<SpaceProvider>(
+      builder: (context, value, child) {
+        if (value.favItems.length > 0) {
+          return Scaffold(
+            body: Padding(
               padding: EdgeInsets.only(bottom: context.dp(30)),
               child: Stack(
                 alignment: Alignment.center,
@@ -30,17 +30,17 @@ class FavoritePage extends StatelessWidget {
                   _buildAppBar(context),
                 ],
               ),
-            );
-          } else {
-            return child!;
-          }
-        },
-        child: ErrorPage(
-          key: Key('Fav-Error'),
-          useButton: false,
-          errorTitle: 'Favorite Space',
-          errorSubTitle: 'You don\'t have any favorite space yet.',
-        ),
+            ),
+          );
+        } else {
+          return child!;
+        }
+      },
+      child: ErrorPage(
+        key: Key('Fav-Error'),
+        useButton: false,
+        errorTitle: 'Favorite Space',
+        errorSubTitle: 'You don\'t have any favorite space yet.',
       ),
     );
   }
