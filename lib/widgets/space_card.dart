@@ -16,6 +16,7 @@ class SpaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
+      closedColor: context.background,
       closedElevation: 0,
       transitionDuration: Duration(seconds: 1),
       closedShape:

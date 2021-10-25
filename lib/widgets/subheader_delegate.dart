@@ -21,6 +21,7 @@ class SubHeaderDelegate extends SliverPersistentHeaderDelegate {
     // print('SUB HEADER OFFSET: $shrinkOffset');
     return Material(
       elevation: (shrinkOffset > 20) ? 4 : 0,
+      color: context.background,
       child: AnimatedContainer(
         color: context.background,
         curve: Curves.easeInOutQuart,

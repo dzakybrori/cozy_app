@@ -63,18 +63,20 @@ class _HomePageState extends State<HomePage> {
     }
     return SafeArea(
       bottom: false,
-      child: CustomScrollView(
-        controller: _scrollController,
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          _buildHeader(),
-          _buildSubHeader(_subHeader[0]),
-          _buildPopularCities(),
-          _buildSubHeaderPersistent(),
-          _buildRecommendedSpaces(),
-          _buildSubHeader(_subHeader[2]),
-          _buildTipsAndGuidance(),
-        ],
+      child: Scaffold(
+        body: CustomScrollView(
+          controller: _scrollController,
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            _buildHeader(),
+            _buildSubHeader(_subHeader[0]),
+            _buildPopularCities(),
+            _buildSubHeaderPersistent(),
+            _buildRecommendedSpaces(),
+            _buildSubHeader(_subHeader[2]),
+            _buildTipsAndGuidance(),
+          ],
+        ),
       ),
     );
   }
