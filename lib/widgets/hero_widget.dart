@@ -11,6 +11,7 @@ class HeroWidget extends StatelessWidget {
   Widget build(BuildContext context) => Hero(
         tag: tag,
         transitionOnUserGestures: true,
-        child: Material(type: MaterialType.transparency, child: child),
+        child: Material(
+            type: MaterialType.transparency, child: FittedBox(child: child)),
       );
 }

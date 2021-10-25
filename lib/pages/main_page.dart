@@ -1,8 +1,9 @@
 import 'package:animations/animations.dart';
+import 'package:cozy_app/pages/favorite_page.dart';
 import 'package:flutter/material.dart';
 
-import './home_page.dart';
 import './error_page.dart';
+import './home_page.dart';
 import '../extension/extensions.dart';
 import '../widgets/custom_navbar.dart';
 
@@ -37,12 +38,7 @@ class _MainPageState extends State<MainPage> {
       errorTitle: 'Booked Space History',
       errorSubTitle: 'Start booked and enjoy the facilities.',
     ),
-    ErrorPage(
-      key: Key('Main-3'),
-      useButton: false,
-      errorTitle: 'Wishes Space',
-      errorSubTitle: 'Don\'t you have any fav space?.',
-    ),
+    FavoritePage(key: Key('Main-3')),
   ];
 
   @override

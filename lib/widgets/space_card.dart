@@ -13,22 +13,6 @@ class SpaceCard extends StatelessWidget {
 
   SpaceCard(this.space);
 
-  // void onTapFade(BuildContext context) => Navigator.push(
-  //       context,
-  //       PageRouteBuilder(
-  //           transitionDuration: Duration(seconds: 1),
-  //           reverseTransitionDuration: Duration(seconds: 1),
-  //           pageBuilder: (context, animation, secondaryAnimation) {
-  //             final curvedAnimation = CurvedAnimation(
-  //                 parent: animation, curve: Curves.easeInOutCubic);
-  //
-  //             return FadeTransition(
-  //               opacity: curvedAnimation,
-  //               child: DetailPage(space),
-  //             );
-  //           }),
-  //     );
-
   @override
   Widget build(BuildContext context) {
     return OpenContainer(

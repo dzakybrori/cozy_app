@@ -160,6 +160,7 @@ class _DetailPageState extends State<DetailPage> {
       );
 
   Widget _buildRatingStars() => Row(
+      mainAxisSize: MainAxisSize.min,
       children: [1, 2, 3, 4, 5]
           .map((index) => Padding(
               padding: EdgeInsets.only(left: context.dp(2)),
@@ -199,9 +200,7 @@ class _DetailPageState extends State<DetailPage> {
                   padding: EdgeInsets.only(bottom: context.dp(4)),
                   child: GestureDetector(
                     onDoubleTap: _onClickFav,
-                    child: HeroWidget(
-                        tag: widget.space.id.spaceImg,
-                        child: MyImageNetwork(widget.space.imageUrl)),
+                    child: MyImageNetwork(widget.space.imageUrl),
                   )),
               _buildTopModalRounded(),
               AnimatedScale(
@@ -247,7 +246,8 @@ class _DetailPageState extends State<DetailPage> {
                         tag: widget.space.id.spacePrice,
                         child: MyRichText(priceText: '\$${widget.space.price}'))
                   ])),
-              _buildRatingStars(),
+              HeroWidget(
+                  tag: widget.space.id.spaceStars, child: _buildRatingStars()),
             ],
           ),
         ),
