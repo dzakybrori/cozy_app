@@ -20,7 +20,9 @@ class FacilityItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SvgPicture.asset(imageUrl,
-              width: context.dp(32), height: context.dp(32)),
+              width: context.dp(32),
+              height: context.dp(32),
+              color: context.onSurface),
           SizedBox(height: context.dp(8)),
           Expanded(
               child: MyRichText(
