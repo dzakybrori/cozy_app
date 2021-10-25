@@ -28,7 +28,6 @@ extension ScreenUtil on BuildContext {
   // Text and Color Theme data
   TextTheme get text => Theme.of(this).textTheme;
   Color get primaryColor => Theme.of(this).colorScheme.primary;
-  Color get primaryVariant => Theme.of(this).colorScheme.primaryVariant;
   Color get secondaryColor => Theme.of(this).colorScheme.secondary;
   Color get secondaryVariant => Theme.of(this).colorScheme.secondaryVariant;
   Color get hintColor => Theme.of(this).hintColor;
@@ -48,6 +47,10 @@ extension ScreenUtil on BuildContext {
   // Widgets theme data
   ElevatedButtonThemeData get elevatedButton =>
       Theme.of(this).elevatedButtonTheme;
+
+  // Theme
+  bool get isDarkMode =>
+      MediaQuery.of(this).platformBrightness == Brightness.dark;
 }
 
 // Hero Tag extension

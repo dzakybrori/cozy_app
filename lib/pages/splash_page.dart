@@ -57,7 +57,7 @@ class SplashPage extends StatelessWidget {
       padding: EdgeInsets.only(
           top: context.dp(8), bottom: context.dp(8), right: context.dp(8)),
       decoration: BoxDecoration(
-        color: Colors.white70,
+        color: context.background.withOpacity(0.7),
         borderRadius: BorderRadius.circular(17),
       ),
       child: Column(

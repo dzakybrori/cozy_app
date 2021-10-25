@@ -376,7 +376,7 @@ class _DetailPageState extends State<DetailPage> {
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios_rounded),
                     iconSize: context.dp(16),
-                    color: context.primaryVariant,
+                    color: context.onBackground,
                     padding: EdgeInsets.only(right: context.dp(2)),
                     onPressed: () => Navigator.pop(context),
                   ),
@@ -393,7 +393,7 @@ class _DetailPageState extends State<DetailPage> {
                     iconSize: context.dp(18),
                     color: _isWished
                         ? context.secondaryColor
-                        : context.primaryVariant,
+                        : context.onBackground,
                     padding: EdgeInsets.all(context.dp(10)),
                     onPressed: _onClickFav,
                   ),
