@@ -1,3 +1,4 @@
+import 'package:cozy_app/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,12 +33,14 @@ class _HomePageState extends State<HomePage> {
   final _scrollController = ScrollController();
 
   late SpaceProvider _spaceProvider;
+  late ThemeProvider _themeProvider;
 
   @override
   void initState() {
     _scrollController.addListener(_scrollListener);
     super.initState();
     _spaceProvider = Provider.of<SpaceProvider>(context, listen: false);
+    _themeProvider = Provider.of<ThemeProvider>(context, listen: false);
   }
 
   @override
@@ -97,16 +100,58 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: context.background,
         title: Padding(
           padding: EdgeInsets.only(
-              top: context.dp(30), left: context.dp(paddingEdge)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+              top: context.dp(30),
+              left: context.dp(paddingEdge),
+              right: context.dp(paddingEdge)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              MyText(_title, style: context.text.headline6),
-              MyText(_subTitle, style: context.text.subtitle1),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyText(_title, style: context.text.headline6),
+                  MyText(_subTitle, style: context.text.subtitle1),
+                ],
+              ),
+              _themeButton(),
             ],
           ),
         ),
       );
+
+  InkWell _themeButton() {
+    return InkWell(
+      onTap: () => _themeProvider.toggleDarkMode(),
+      child: SizedBox(
+        width: context.dp(35),
+        height: context.dp(35),
+        child: Consumer<ThemeProvider>(
+          builder: (context, value, child) => AnimatedSwitcher(
+            duration: Duration(milliseconds: 500),
+            switchInCurve: Curves.easeIn,
+            switchOutCurve: Curves.easeOut,
+            transitionBuilder: (child, animation) => RotationTransition(
+              turns: animation,
+              child: ScaleTransition(
+                scale: animation,
+                child: child,
+              ),
+            ),
+            child: value.isDarkMode
+                ? child!
+                : Image.asset(
+                    'assets/images/icon_moon.png',
+                    key: Key('dark_mode'),
+                  ),
+          ),
+          child: Image.asset(
+            'assets/images/icon_sun.png',
+            key: Key('light_mode'),
+          ),
+        ),
+      ),
+    );
+  }
 
   SliverPadding _buildSubHeader(String title) => SliverPadding(
         padding: EdgeInsets.only(

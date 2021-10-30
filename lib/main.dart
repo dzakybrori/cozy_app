@@ -1,3 +1,4 @@
+import 'package:cozy_app/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -22,20 +23,27 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       // DeviceOrientation.portraitDown,
     ]);
-    return ChangeNotifierProvider(
-      create: (context) => SpaceProvider(),
-      child: MaterialApp(
-        title: 'Cozy App',
-        themeMode: ThemeMode.system,
-        theme: myLightTheme,
-        darkTheme: myDarkTheme,
-        debugShowCheckedModeBanner: false,
-        routes: {
-          RouteName.splashPage: (ctx) => SplashPage(key: Key('splash-page')),
-          RouteName.mainPage: (ctx) => MainPage(key: Key('main-page')),
-          RouteName.errorPage: (ctx) => ErrorPage(key: Key('error-page')),
-        },
-      ),
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ThemeProvider>.value(value: ThemeProvider()),
+          ChangeNotifierProvider<SpaceProvider>(
+              create: (context) => SpaceProvider()),
+        ],
+        builder: (context, _) {
+          final _themeProvider = Provider.of<ThemeProvider>(context).theme;
+          return MaterialApp(
+            title: 'Cozy App',
+            themeMode: _themeProvider,
+            theme: myLightTheme,
+            darkTheme: myDarkTheme,
+            debugShowCheckedModeBanner: false,
+            routes: {
+              RouteName.splashPage: (ctx) =>
+                  SplashPage(key: Key('splash-page')),
+              RouteName.mainPage: (ctx) => MainPage(key: Key('main-page')),
+              RouteName.errorPage: (ctx) => ErrorPage(key: Key('error-page')),
+            },
+          );
+        });
   }
 }
