@@ -121,7 +121,8 @@ class _HomePageState extends State<HomePage> {
 
   InkWell _themeButton() {
     return InkWell(
-      onTap: () => _themeProvider.toggleDarkMode(),
+      onTap: () => _themeProvider
+          .toggleDarkMode(_themeProvider.isDarkMode ?? context.isDarkMode),
       child: SizedBox(
         width: context.dp(35),
         height: context.dp(35),
@@ -137,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                 child: child,
               ),
             ),
-            child: value.isDarkMode
+            child: (value.isDarkMode ?? context.isDarkMode)
                 ? child!
                 : Image.asset(
                     'assets/images/icon_moon.png',

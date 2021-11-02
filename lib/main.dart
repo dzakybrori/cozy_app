@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
 import './pages/error_page.dart';
@@ -10,7 +11,8 @@ import './provider/theme_provider.dart';
 import './shared/shared_value.dart';
 import './shared/theme.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -30,10 +32,10 @@ class MyApp extends StatelessWidget {
               create: (context) => SpaceProvider()),
         ],
         builder: (context, _) {
-          final _themeProvider = Provider.of<ThemeProvider>(context).theme;
+          final _themeProvider = Provider.of<ThemeProvider>(context);
           return MaterialApp(
             title: 'Cozy App',
-            themeMode: _themeProvider,
+            themeMode: _themeProvider.theme,
             theme: myLightTheme,
             darkTheme: myDarkTheme,
             debugShowCheckedModeBanner: false,

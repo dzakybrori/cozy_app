@@ -23,7 +23,6 @@ class SubHeaderDelegate extends SliverPersistentHeaderDelegate {
       elevation: (shrinkOffset > 20) ? 4 : 0,
       color: context.background,
       child: AnimatedContainer(
-        color: context.background,
         curve: Curves.easeInOutQuart,
         alignment:
             (shrinkOffset > 20) ? Alignment.bottomCenter : Alignment.bottomLeft,

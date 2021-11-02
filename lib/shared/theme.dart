@@ -33,6 +33,7 @@ ThemeData myLightTheme = ThemeData(
     accentColor: secondarySwatch,
     errorColor: errorColor,
     backgroundColor: lightBackgroundColor,
+    brightness: Brightness.light,
   ).copyWith(
     primary: primarySwatch,
     secondary: secondarySwatch,
@@ -130,6 +131,7 @@ ThemeData myDarkTheme = ThemeData(
     accentColor: secondarySwatch,
     errorColor: errorColor,
     backgroundColor: darkBackgroundColor,
+    brightness: Brightness.dark,
   ).copyWith(
     primary: primarySwatch.shade700,
     secondary: secondarySwatch,
