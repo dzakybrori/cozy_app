@@ -1,9 +1,9 @@
-import 'package:cozy_app/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../extension/extensions.dart';
 import '../provider/space_provider.dart';
+import '../provider/theme_provider.dart';
 import '../shared/shared_value.dart';
 import '../widgets/city_card.dart';
 import '../widgets/my_text.dart';

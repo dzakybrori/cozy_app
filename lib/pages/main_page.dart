@@ -1,8 +1,8 @@
 import 'package:animations/animations.dart';
-import 'package:cozy_app/pages/favorite_page.dart';
 import 'package:flutter/material.dart';
 
 import './error_page.dart';
+import './favorite_page.dart';
 import './home_page.dart';
 import '../extension/extensions.dart';
 import '../widgets/custom_navbar.dart';
