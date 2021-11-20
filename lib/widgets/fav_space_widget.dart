@@ -107,7 +107,7 @@ class _FavSpaceWidgetState extends State<FavSpaceWidget> {
     return AnimatedPositioned(
       duration: Duration(milliseconds: 500),
       top: _isExpanded ? context.h(150) : context.h(60),
-      bottom: _isExpanded ? context.h(10) : context.h(100),
+      bottom: _isExpanded ? context.dh * 0.035 : context.h(100),
       width: _isExpanded ? context.dp(280) : context.dp(260),
       child: Container(
         padding: EdgeInsets.all(context.dp(20)),

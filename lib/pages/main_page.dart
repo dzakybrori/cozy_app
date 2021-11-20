@@ -63,12 +63,14 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _bottomNavBar() {
-    return CustomNavBar(
-      icons: icons,
-      onTap: (value) => setState(() => _selectedIndex = value),
-      selectedIndex: _selectedIndex,
-      selectedItemColor: context.onSurface,
-      unSelectedItemColor: context.disableColor,
+    return SafeArea(
+      child: CustomNavBar(
+        icons: icons,
+        onTap: (value) => setState(() => _selectedIndex = value),
+        selectedIndex: _selectedIndex,
+        selectedItemColor: context.onSurface,
+        unSelectedItemColor: context.disableColor,
+      ),
     );
   }
 }
