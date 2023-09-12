@@ -17,7 +17,6 @@ MaterialColor secondarySwatch = generateMaterialColor(secondaryColor);
 
 ThemeData myLightTheme = ThemeData(
   fontFamily: 'Poppins',
-  backgroundColor: lightBackgroundColor,
   scaffoldBackgroundColor: lightBackgroundColor,
   hintColor: Colors.black54,
   disabledColor: Colors.black38,
@@ -45,8 +44,8 @@ ThemeData myLightTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: primaryColor,
-      onPrimary: lightBackgroundColor,
+      backgroundColor: primaryColor,
+      foregroundColor: lightBackgroundColor,
       fixedSize: const Size(210, 50),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
       textStyle: const TextStyle(
@@ -58,35 +57,35 @@ ThemeData myLightTheme = ThemeData(
     ),
   ),
   textTheme: TextTheme(
-    headline6: TextStyle(
+    titleLarge: TextStyle(
       fontSize: 24,
       letterSpacing: 0,
       color: Colors.black87,
       fontWeight: FontWeight.w500,
       overflow: TextOverflow.ellipsis,
     ),
-    subtitle1: TextStyle(
+    titleMedium: TextStyle(
       fontSize: 16,
       letterSpacing: 0,
       color: Colors.black54,
       fontWeight: FontWeight.w300,
       overflow: TextOverflow.ellipsis,
     ),
-    subtitle2: TextStyle(
+    labelLarge: TextStyle(
       fontSize: 16,
       letterSpacing: 0,
       color: Colors.black87,
       fontWeight: FontWeight.normal,
       overflow: TextOverflow.ellipsis,
     ),
-    bodyText1: TextStyle(
+    bodyLarge: TextStyle(
       fontSize: 18,
       letterSpacing: 0,
       color: Colors.black87,
       fontWeight: FontWeight.w500,
       overflow: TextOverflow.ellipsis,
     ),
-    bodyText2: TextStyle(
+    bodyMedium: TextStyle(
       fontSize: 14,
       letterSpacing: 0,
       color: Colors.black54,
@@ -94,15 +93,15 @@ ThemeData myLightTheme = ThemeData(
       fontWeight: FontWeight.w300,
       overflow: TextOverflow.ellipsis,
     ),
-    caption: TextStyle(
-      height: 1.7,
+    bodySmall: TextStyle(
+      height: 1.4,
       fontSize: 13,
-      letterSpacing: 0,
+      letterSpacing: 0.4,
       color: lightBackgroundColor,
       fontWeight: FontWeight.w500,
       overflow: TextOverflow.ellipsis,
     ),
-    button: TextStyle(
+    labelMedium: TextStyle(
       fontSize: 16,
       letterSpacing: 0,
       height: 1.7,
@@ -115,7 +114,6 @@ ThemeData myLightTheme = ThemeData(
 
 ThemeData myDarkTheme = ThemeData(
   fontFamily: 'Poppins',
-  backgroundColor: darkBackgroundColor,
   scaffoldBackgroundColor: darkBackgroundColor,
   hintColor: Colors.white60,
   disabledColor: Colors.white38,
@@ -143,8 +141,8 @@ ThemeData myDarkTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: primarySwatch.shade700,
-      onPrimary: lightBackgroundColor,
+      backgroundColor: primarySwatch.shade700,
+      foregroundColor: lightBackgroundColor,
       fixedSize: const Size(210, 50),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
       textStyle: const TextStyle(
@@ -156,35 +154,35 @@ ThemeData myDarkTheme = ThemeData(
     ),
   ),
   textTheme: TextTheme(
-    headline6: TextStyle(
+    titleLarge: TextStyle(
       fontSize: 24,
       letterSpacing: 0,
       color: Colors.white.withOpacity(0.87),
       fontWeight: FontWeight.w500,
       overflow: TextOverflow.ellipsis,
     ),
-    subtitle1: TextStyle(
+    titleMedium: TextStyle(
       fontSize: 16,
       letterSpacing: 0,
       color: Colors.white60,
       fontWeight: FontWeight.w300,
       overflow: TextOverflow.ellipsis,
     ),
-    subtitle2: TextStyle(
+    labelLarge: TextStyle(
       fontSize: 16,
       letterSpacing: 0,
       color: Colors.white.withOpacity(0.87),
       fontWeight: FontWeight.normal,
       overflow: TextOverflow.ellipsis,
     ),
-    bodyText1: TextStyle(
+    bodyLarge: TextStyle(
       fontSize: 18,
       letterSpacing: 0,
       color: Colors.white.withOpacity(0.87),
       fontWeight: FontWeight.w500,
       overflow: TextOverflow.ellipsis,
     ),
-    bodyText2: TextStyle(
+    bodyMedium: TextStyle(
       fontSize: 14,
       letterSpacing: 0,
       color: Colors.white60,
@@ -192,15 +190,15 @@ ThemeData myDarkTheme = ThemeData(
       fontWeight: FontWeight.w300,
       overflow: TextOverflow.ellipsis,
     ),
-    caption: TextStyle(
-      height: 1.7,
+    bodySmall: TextStyle(
+      height: 1.4,
       fontSize: 13,
-      letterSpacing: 0,
+      letterSpacing: 0.4,
       color: lightBackgroundColor,
       fontWeight: FontWeight.w500,
       overflow: TextOverflow.ellipsis,
     ),
-    button: TextStyle(
+    labelMedium: TextStyle(
       fontSize: 16,
       letterSpacing: 0,
       height: 1.7,

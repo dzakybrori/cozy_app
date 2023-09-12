@@ -57,7 +57,7 @@ class FavoritePage extends StatelessWidget {
             color: context.surface,
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(50))),
         child: MyText('Favorite Space',
-            style: context.text.headline6?.copyWith(fontSize: 20)),
+            style: context.text.titleLarge?.copyWith(fontSize: 20)),
       ),
     );
   }

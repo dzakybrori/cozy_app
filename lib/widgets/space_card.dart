@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,11 +37,11 @@ class SpaceCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MyText(space.name, style: context.text.bodyText1),
+                    MyText(space.name, style: context.text.bodyLarge),
                     _buildPriceText(context),
                     SizedBox(height: context.dp(16)),
                     MyText('${space.city}, ${space.country}',
-                        style: context.text.bodyText2),
+                        style: context.text.bodyMedium),
                   ],
                 ),
               ),
@@ -62,8 +64,10 @@ class SpaceCard extends StatelessWidget {
     return Text.rich(
       TextSpan(
           text: '\$${space.price}',
-          children: [TextSpan(text: ' / month', style: context.text.subtitle1)],
-          style: context.text.button),
+          children: [
+            TextSpan(text: ' / month', style: context.text.titleMedium)
+          ],
+          style: context.text.labelLarge),
       textScaleFactor: context.ts,
     );
   }
@@ -78,8 +82,8 @@ class SpaceCard extends StatelessWidget {
           children: [
             MyImageNetwork(
               space.imageUrl,
-              width: context.dp(130),
-              height: context.dp(110),
+              width: double.infinity,
+              height: double.infinity,
             ),
             _buildSpaceRating(context)
           ],
@@ -91,30 +95,40 @@ class SpaceCard extends StatelessWidget {
   Align _buildSpaceRating(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
-      child: Container(
-        width: context.dp(70),
-        height: context.dp(30),
-        decoration: BoxDecoration(
-          color: context.primaryColor,
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: context.dp(16),
-            right: context.dp(12),
-            top: context.dp(4),
-            bottom: context.dp(8),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset('assets/svg/icon_star.svg',
-                  width: context.dp(18), color: context.secondaryColor),
-              MyText('${space.rating}/5', style: context.text.caption),
-            ],
-          ),
-        ),
+      child: LayoutBuilder(
+        builder: (context, constraint) {
+          return Container(
+            width: min(context.dp(70), constraint.maxWidth / 2),
+            height: context.dp(30),
+            decoration: BoxDecoration(
+              color: context.primaryColor,
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: context.dp(16),
+                right: context.dp(12),
+                top: context.dp(4),
+                bottom: context.dp(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset('assets/svg/icon_star.svg',
+                      width: context.dp(18), color: context.secondaryColor),
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child:
+                          MyText('${space.rating}/5', style: context.text.bodySmall),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
       ),
     );
   }

@@ -56,7 +56,7 @@ class CityCard extends StatelessWidget {
         child: MyText(city.name,
             maxLine: 1,
             textAlign: TextAlign.center,
-            style: context.text.bodyText1?.copyWith(fontSize: 16)),
+            style: context.text.bodyLarge?.copyWith(fontSize: 16)),
       ),
     );
   }

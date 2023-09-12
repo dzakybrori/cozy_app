@@ -239,7 +239,7 @@ class _DetailPageState extends State<DetailPage> {
                       tag: widget.space.id.spaceName,
                       child: MyText(widget.space.name,
                           style:
-                              context.text.headline6?.copyWith(fontSize: 22)),
+                              context.text.titleLarge?.copyWith(fontSize: 22)),
                     ),
                     HeroWidget(
                         tag: widget.space.id.spacePrice,
@@ -267,7 +267,7 @@ class _DetailPageState extends State<DetailPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyText(subTitle, style: context.text.subtitle2),
+              MyText(subTitle, style: context.text.titleSmall),
               SizedBox(height: context.dp(space)),
               content
             ],
@@ -296,7 +296,7 @@ class _DetailPageState extends State<DetailPage> {
           bottom: context.dp(12),
         ),
         sliver: SliverToBoxAdapter(
-            child: MyText(_subTitles[1], style: context.text.subtitle2)),
+            child: MyText(_subTitles[1], style: context.text.titleSmall)),
       );
 
   SliverToBoxAdapter _buildPhotos() {
@@ -333,7 +333,7 @@ class _DetailPageState extends State<DetailPage> {
         children: [
           Expanded(
             child: MyText('${widget.space.address}\n${widget.space.city}',
-                style: context.text.bodyText2
+                style: context.text.bodyMedium
                     ?.copyWith(fontWeight: FontWeight.normal)),
           ),
           SizedBox(width: context.dp(30)),

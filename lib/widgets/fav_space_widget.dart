@@ -97,8 +97,8 @@ class _FavSpaceWidgetState extends State<FavSpaceWidget> {
     return Text.rich(
       TextSpan(
           text: '\$${widget.space.price}',
-          children: [TextSpan(text: ' / month', style: context.text.subtitle1)],
-          style: context.text.button),
+          children: [TextSpan(text: ' / month', style: context.text.titleMedium)],
+          style: context.text.labelLarge),
       textScaleFactor: context.ts,
     );
   }
@@ -117,11 +117,11 @@ class _FavSpaceWidgetState extends State<FavSpaceWidget> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             MyText('${widget.space.city}, ${widget.space.country}',
-                style: context.text.bodyText2),
+                style: context.text.bodyMedium),
             HeroWidget(
                 tag: widget.space.id.spaceName,
                 child:
-                    MyText(widget.space.name, style: context.text.bodyText1)),
+                    MyText(widget.space.name, style: context.text.bodyLarge)),
             Row(
               children: [
                 HeroWidget(

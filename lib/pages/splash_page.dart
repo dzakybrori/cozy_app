@@ -63,9 +63,9 @@ class SplashPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MyText(_title, style: context.text.headline6),
+          MyText(_title, style: context.text.titleLarge),
           SizedBox(height: context.h(10)),
-          MyText(_subTitle, style: context.text.subtitle1),
+          MyText(_subTitle, style: context.text.titleMedium),
         ],
       ),
     );

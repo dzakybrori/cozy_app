@@ -23,9 +23,9 @@ class TipsCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MyText(tips.title, style: context.text.bodyText1),
+            MyText(tips.title, style: context.text.bodyLarge),
             MyText('Updated ${tips.updatedAt}',
-                style: context.text.bodyText2?.copyWith(height: 1.7))
+                style: context.text.bodyMedium?.copyWith(height: 1.7))
           ],
         ),
         Spacer(),

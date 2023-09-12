@@ -33,7 +33,7 @@ class SubHeaderDelegate extends SliverPersistentHeaderDelegate {
           bottom: context.dp(16),
         ),
         child: MyText(subTitle,
-            style: context.text.subtitle2
+            style: context.text.titleSmall
                 ?.copyWith(fontSize: (shrinkOffset > 20) ? 18 : 16)),
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 // Mockup design size
@@ -32,6 +34,10 @@ extension ScreenUtil on BuildContext {
   double get sh => isPortrait ? mockupHeight / dh : mockupWidth / dw;
 
   double get ts => isPortrait ? dw / mockupWidth : dh / mockupWidth;
+  double get textScale14 => min(ts, 1.4);
+  double get textScale12 => min(ts, 1.2);
+  double get textScale11 => min(ts, 1.1);
+
 
   double dp(double size) =>
       isPortrait ? size / mockupWidth * dw : size / mockupWidth * dh;
@@ -45,7 +51,7 @@ extension ScreenUtil on BuildContext {
 
   Color get secondaryColor => Theme.of(this).colorScheme.secondary;
 
-  Color get secondaryVariant => Theme.of(this).colorScheme.secondaryVariant;
+  Color get secondaryContainer => Theme.of(this).colorScheme.secondaryContainer;
 
   Color get hintColor => Theme.of(this).hintColor;
 

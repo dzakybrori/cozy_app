@@ -109,8 +109,8 @@ class _HomePageState extends State<HomePage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyText(_title, style: context.text.headline6),
-                  MyText(_subTitle, style: context.text.subtitle1),
+                  MyText(_title, style: context.text.titleLarge),
+                  MyText(_subTitle, style: context.text.titleMedium),
                 ],
               ),
               _themeButton(),
@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
           bottom: context.dp(16),
         ),
         sliver: SliverToBoxAdapter(
-            child: MyText(title, maxLine: 1, style: context.text.subtitle2)),
+            child: MyText(title, maxLine: 1, style: context.text.titleSmall)),
       );
 
   SliverPersistentHeader _buildSubHeaderPersistent() => SliverPersistentHeader(

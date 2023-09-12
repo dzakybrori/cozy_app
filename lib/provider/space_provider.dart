@@ -32,7 +32,8 @@ class SpaceProvider with ChangeNotifier {
     if (_items.isEmpty) {
       _isLoading = true;
       var result = await http.get(
-        Uri.parse('https://bwa-cozy.herokuapp.com/recommended-spaces'),
+        Uri.parse('https://bwa-cozy-api.vercel.app/recommended-spaces'),
+        // Uri.parse('https://bwa-cozy.herokuapp.com/recommended-spaces'),
       );
 
       if (result.statusCode == 200) {

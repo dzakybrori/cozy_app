@@ -40,10 +40,10 @@ class ErrorPage extends StatelessWidget {
               Image.asset('assets/images/error_404.png', width: context.dw),
               SizedBox(height: context.dp(70)),
               MyText(_errorTitle(),
-                  style: context.text.headline6, textAlign: TextAlign.center),
+                  style: context.text.titleLarge, textAlign: TextAlign.center),
               SizedBox(height: context.dp(14)),
               Text(_errorSubTitle(),
-                  style: context.text.subtitle1, textAlign: TextAlign.center),
+                  style: context.text.titleMedium, textAlign: TextAlign.center),
               if (useButton) SizedBox(height: context.dp(50)),
               if (useButton)
                 ElevatedButton(

@@ -49,12 +49,11 @@ class MyRichText extends StatelessWidget {
           children: [
             TextSpan(
                 text: subText ?? ' / month',
-                style: context.text.subtitle1?.copyWith(fontSize: fontSize))
+                style: context.text.titleMedium?.copyWith(fontSize: fontSize))
           ],
-          style: context.text.button?.copyWith(fontSize: fontSize)),
+          style: context.text.labelLarge?.copyWith(fontSize: fontSize)),
       maxLines: 1,
       softWrap: true,
-      textScaleFactor: context.ts,
       overflow: TextOverflow.ellipsis,
     );
   }
